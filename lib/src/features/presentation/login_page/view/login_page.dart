@@ -6,8 +6,8 @@ import 'package:flutter/services.dart';
 //colors
 import 'package:project_flutter_app_delivery/src/colors.dart';
 //buttons
-import 'package:project_flutter_app_delivery/src/features/presentation/widgets/back_button.dart';
-import 'package:project_flutter_app_delivery/src/features/presentation/widgets/rounded_button.dart';
+import 'package:project_flutter_app_delivery/src/features/presentation/common_widgets/back_button.dart';
+import 'package:project_flutter_app_delivery/src/features/presentation/common_widgets/rounded_button.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});

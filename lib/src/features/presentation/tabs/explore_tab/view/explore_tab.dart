@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:project_flutter_app_delivery/src/colors.dart';
-import 'package:project_flutter_app_delivery/src/features/presentation/widgets/header_text.dart';
-import 'package:project_flutter_app_delivery/src/features/presentation/widgets/rounded_button.dart';
+import 'package:project_flutter_app_delivery/src/features/presentation/common_widgets/Cards/populares_card.dart';
+import 'package:project_flutter_app_delivery/src/features/presentation/common_widgets/header_text.dart';
+import 'package:project_flutter_app_delivery/src/features/presentation/common_widgets/rounded_button.dart';
 
 class ExploreTab extends StatelessWidget {
   const ExploreTab({super.key});
@@ -26,7 +27,47 @@ class ExploreTab extends StatelessWidget {
                         texto: 'Discover new places',
                         color: Colors.black,
                         fontSize: 30.0)), 
-                        _sliderCards()
+                        _sliderCards(),
+                         _headers(context, "Popular this week", "Show all"),
+                createPopularesCard(
+                    context: context,
+                    image: AssetImage(
+                    'assets/stock.png'),
+                    title: "Andy & Cindy's Diner",
+                    subtitle: "87 Botsford Circle Apt",
+                    review: "4.8",
+                    ratings: "(233 ratings)",
+                    buttonText: 'Delivery',
+                    hasActionButton: true),
+                createPopularesCard(
+                    context: context,
+                    image: AssetImage(
+                    'assets/stock.png'),
+                    title: "Andy & Cindy's Diner",
+                    subtitle: "87 Botsford Circle Apt",
+                    review: "4.8",
+                    ratings: "(233 ratings)",
+                    buttonText: 'Delivery',
+                    hasActionButton: true),
+                createPopularesCard(
+                    context: context,
+                    image: AssetImage(
+                    'assets/stock.png'),
+                    title: "Andy & Cindy's Diner",
+                    subtitle: "87 Botsford Circle Apt",
+                    review: "4.8",
+                    ratings: "(233 ratings)",
+                    buttonText: 'Delivery',
+                    hasActionButton: true),
+                SizedBox(
+                  height: 10.0,
+                ),
+                GestureDetector(
+                    onTap: () {
+                      //Navigator.pushNamed(context, 'collections');
+                    },
+                    child: _headers(context, "Collections", "Show all")),
+                _sliderCollections()
                     ],
                   ),
                 ),
@@ -172,6 +213,64 @@ Widget _tarjeta(BuildContext context) {
           )
         ],
       ),
+    ),
+  );
+}
+
+Widget _headers(BuildContext context, String textHeader, String textAction) {
+  return Row(
+    children: [
+      Container(
+        alignment: Alignment.centerLeft,
+        child: createText(texto: textHeader, fontSize: 20.0),
+      ),
+      Spacer(),
+      GestureDetector(
+        onTap: (){},
+        child: Row(
+          children: [
+            Text(
+              textAction,
+              style: TextStyle(
+                  color: Colors.black,
+                  fontWeight: FontWeight.w500,
+                  fontSize: 15.0),
+            ),
+            Icon(Icons.play_arrow),
+          ],
+        ),
+      ),
+    ],
+  );
+}
+
+Widget _sliderCollections() {
+  return Container(
+      height: 180.0,
+      child: ListView.builder(
+          scrollDirection: Axis.horizontal,
+          itemBuilder: (BuildContext context, int index) {
+            return _tarjetaCollection(context);
+          }));
+}
+
+Widget _tarjetaCollection(BuildContext context) {
+  return Container(
+    margin: EdgeInsets.all(10.0),
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        ClipRRect(
+          borderRadius: BorderRadius.circular(20.0),
+          child: Image(
+            width: 300,
+            height: 150,
+            fit: BoxFit.cover,
+            image: AssetImage(
+                    'assets/stock.png'),
+          ),
+        ),
+      ],
     ),
   );
 }

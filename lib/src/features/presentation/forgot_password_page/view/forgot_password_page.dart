@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:project_flutter_app_delivery/src/colors.dart';
-import 'package:project_flutter_app_delivery/src/features/presentation/widgets/rounded_button.dart';
+import 'package:project_flutter_app_delivery/src/features/presentation/common_widgets/rounded_button.dart';
 
 class ForgotPassword extends StatelessWidget {
   const ForgotPassword({super.key});
