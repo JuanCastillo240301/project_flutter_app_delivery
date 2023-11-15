@@ -6,8 +6,8 @@ import 'package:flutter/services.dart';
 //colors
 import 'package:project_flutter_app_delivery/src/colors.dart';
 //buttons
-import 'package:project_flutter_app_delivery/src/widgets/back_button.dart';
-import 'package:project_flutter_app_delivery/src/widgets/rounded_button.dart';
+import 'package:project_flutter_app_delivery/src/features/presentation/widgets/back_button.dart';
+import 'package:project_flutter_app_delivery/src/features/presentation/widgets/rounded_button.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
@@ -31,7 +31,8 @@ class LoginPage extends StatelessWidget {
                 width: double.infinity,
                 height: 350.0,
                 fit: BoxFit.cover,
-                image: NetworkImage('https://images.unsplash.com/photo-1482049016688-2d3e1b311543?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60')
+                image: AssetImage(
+                    'assets/stock.png')
                 ),
                 Container(
                   margin:  EdgeInsets.only(top: 50.0),
@@ -69,35 +70,45 @@ class LoginPage extends StatelessWidget {
                           _loginbutton(context),
                           Container(
                             margin: EdgeInsets.only(top: 30.0),
-                            child: Text('Forgot you password?', style: TextStyle(
-                              color:Colors.black,
-                              fontSize: 17.0,
-                              fontWeight: FontWeight.w400,
-                            ),
+                            child: GestureDetector(
+                              onTap: (){
+                                Navigator.pushNamed(context, 'forgot');
+                              },
+                              child: Text('Forgot you password?', style: TextStyle(
+                                color:Colors.black,
+                                fontSize: 17.0,
+                                fontWeight: FontWeight.w400,
+                              ),
+                              ),
                             ),
                           ),
-                          Container(
-                            margin: EdgeInsets.only(top: 30.0),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text("Don't have an account?", style: TextStyle(
-                                  color:grey,
-                                  fontSize: 15.0,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                                ),
-                                Container(
-                                  margin: EdgeInsets.symmetric(horizontal: 10.0),
-                                  child: Text('Sign Up', style: TextStyle(
-                                    color:Colors.orange,
+                          GestureDetector(
+                            onTap: (){
+                               Navigator.pushNamed(context, 'signup');
+                            },
+                            child: Container(
+                              margin: EdgeInsets.only(top: 30.0),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text("Don't have an account?", style: TextStyle(
+                                    color:grey,
                                     fontSize: 15.0,
-                                    fontWeight: FontWeight.w400,
+                                    fontWeight: FontWeight.w500,
                                   ),
                                   ),
-                                ),
-                              ],
-
+                                  Container(
+                                    margin: EdgeInsets.symmetric(horizontal: 10.0),
+                                    child: Text('Sign Up', style: TextStyle(
+                                      color:Colors.orange,
+                                      fontSize: 15.0,
+                                      fontWeight: FontWeight.w400,
+                                    ),
+                                    ),
+                                  ),
+                                ],
+                          
+                              ),
                             ),
                           )
                         ],
@@ -141,6 +152,7 @@ Widget _passwordInput(){
             color: bgInputs, borderRadius: BorderRadius.circular(40.0)),
         child: TextFormField(
           keyboardType: TextInputType.visiblePassword,
+          obscureText: true,
           decoration: InputDecoration(
               hintText: 'password',
               border: OutlineInputBorder(borderSide: BorderSide.none
@@ -159,7 +171,7 @@ Widget _loginbutton(BuildContext context){
                     shape: const StadiumBorder(),
                     func: () {
                       
-                      Navigator.pushNamed(context, 'login');
+                     Navigator.pushNamed(context, 'tabs');
                     });
   }
 

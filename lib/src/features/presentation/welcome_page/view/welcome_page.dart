@@ -1,8 +1,8 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:project_flutter_app_delivery/src/widgets/header_text.dart';
-import 'package:project_flutter_app_delivery/src/widgets/rounded_button.dart';
+import 'package:project_flutter_app_delivery/src/features/presentation/widgets/header_text.dart';
+import 'package:project_flutter_app_delivery/src/features/presentation/widgets/rounded_button.dart';
 
 class WelcomePage extends StatelessWidget {
   const WelcomePage({super.key});
@@ -16,8 +16,8 @@ class WelcomePage extends StatelessWidget {
               decoration: const BoxDecoration(
                   image: DecorationImage(
                     fit: BoxFit.cover,
-                    image: NetworkImage(
-                        'https://images.unsplash.com/photo-1502301103665-0b95cc738daf?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60'),
+                    image: AssetImage(
+                    'assets/stock.png'),
                   )
                   ),
               child: BackdropFilter(
