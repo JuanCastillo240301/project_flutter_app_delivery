@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:project_flutter_app_delivery/src/features/presentation/search_page/view/search_page.dart';
 
 
 
@@ -18,4 +19,5 @@ final routes = <String,WidgetBuilder>{
 'forgot': (BuildContext context) => const ForgotPassword(),
 'signup': (BuildContext context) => const SignUp(),
 'tabs': (BuildContext context) => const TabsPage(),
+'search': (BuildContext context) => const SearchPage(),
 };

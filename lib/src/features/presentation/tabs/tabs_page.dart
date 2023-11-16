@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:project_flutter_app_delivery/src/features/presentation/common_widgets/Alerts/alert_dialog.dart';
+import 'package:project_flutter_app_delivery/src/features/presentation/common_widgets/rounded_button.dart';
 import 'package:project_flutter_app_delivery/src/features/presentation/tabs/explore_tab/view/explore_tab.dart';
 import 'package:project_flutter_app_delivery/src/features/presentation/tabs/favorite_tab/view/favorite_tab.dart';
 import 'package:project_flutter_app_delivery/src/features/presentation/tabs/my_order_tab/view/my_order_tab.dart';
@@ -11,8 +13,17 @@ class TabsPage extends StatefulWidget {
   State<TabsPage> createState() => _TabsPageState();
 }
 
-class _TabsPageState extends State<TabsPage> {
 
+
+class _TabsPageState extends State<TabsPage> {
+ @override
+ void initState() {
+   super.initState();
+   Future.delayed(Duration.zero, (){
+    _getLocation(context);
+   });
+   
+ }
   List<Widget> _widgetOptions =[
     ExploreTab(),
     MyOrder(),
@@ -68,6 +79,29 @@ Widget _bottomNavigationBar(BuildContext context){
   ] 
  );
 }
+
+Future _getLocation(BuildContext context) async{
+  await showAlertDialog(
+    context, 
+    AssetImage('assets/location.png'), 
+    'Enable Location', 
+    'Please allow tho use you location to show nearby sites on the map.', 
+    _donebutton(context)
+    );
+}
+
+Widget _donebutton(BuildContext context){
+      return createElevatedButton(
+                    height: 45.0,
+                    width: 335.0,
+                    labelButton: 'Enable Location',
+                    color: Colors.orange,
+                    shape: const StadiumBorder(),
+                    func: () {
+                      
+                     //Navigator.pushNamed(context, 'login');
+                    });
+  }
 
 }
 

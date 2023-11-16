@@ -194,19 +194,7 @@ Widget _tarjeta(BuildContext context) {
                           color: grey,
                           fontWeight: FontWeight.w500,
                           fontSize: 13.0)),
-                  Container(
-                    margin: EdgeInsets.symmetric(horizontal: 0.0),
-                    width: 32,
-                    height: 44.0,
-                    child: createElevatedButton(
-                    labelButton: 'Connect with facebook',
-                    color: Colors.orange,
-                    shape: const StadiumBorder(),
-
-                   func: () {
-                    //  Navigator.pushNamed(context, 'login');
-                    }),
-                  )
+                  
                 ],
               )
             ],
