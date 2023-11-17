@@ -64,7 +64,7 @@ class ExploreTab extends StatelessWidget {
                 ),
                 GestureDetector(
                     onTap: () {
-                      //Navigator.pushNamed(context, 'collections');
+                      Navigator.pushNamed(context, 'collections');
                     },
                     child: _headers(context, "Collections", "Show all")),
                 _sliderCollections()
@@ -87,7 +87,7 @@ Widget _topBar(BuildContext context) {
   return Row(
     children: [
       GestureDetector(
-        //onTap: () => Navigator.pushNamed(context, 'search'),
+        onTap: () => Navigator.pushNamed(context, 'search'),
         child: Container(
           width: 500,
           padding: EdgeInsets.all(10.0),
@@ -243,22 +243,27 @@ Widget _sliderCollections() {
 }
 
 Widget _tarjetaCollection(BuildContext context) {
-  return Container(
-    margin: EdgeInsets.all(10.0),
-    child: Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        ClipRRect(
-          borderRadius: BorderRadius.circular(20.0),
-          child: Image(
-            width: 300,
-            height: 150,
-            fit: BoxFit.cover,
-            image: AssetImage(
-                    'assets/stock.png'),
+  return GestureDetector(
+    onTap: () {
+     // Navigator.pushNamed(context, 'collections');
+    },
+    child: Container(
+      margin: EdgeInsets.all(10.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          ClipRRect(
+            borderRadius: BorderRadius.circular(20.0),
+            child: Image(
+              width: 300,
+              height: 150,
+              fit: BoxFit.cover,
+              image: AssetImage(
+                      'assets/stock.png'),
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     ),
   );
 }

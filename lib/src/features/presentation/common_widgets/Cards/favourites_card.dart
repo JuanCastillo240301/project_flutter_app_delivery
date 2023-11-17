@@ -35,7 +35,7 @@ Widget createFavouritesCard(
               Image(width: 90.0, height: 90.0, fit: BoxFit.cover, image: image),
         ),
         Container(
-          padding: EdgeInsets.only(left: 15.0),
+          padding: EdgeInsets.only(left: 55.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -50,7 +50,7 @@ Widget createFavouritesCard(
                           fontWeight: FontWeight.bold,
                           fontSize: 17)),
                   SizedBox(
-                    width: 25.0,
+                    width: 100.0,
                   ),
                   IconButton(
                       icon: Icon(
