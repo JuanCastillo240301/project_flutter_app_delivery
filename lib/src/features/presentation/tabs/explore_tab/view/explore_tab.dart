@@ -10,29 +10,27 @@ class ExploreTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: CustomScrollView(
-        slivers: [
-          SliverList(
-            delegate: SliverChildListDelegate(
-              [
+        child: CustomScrollView(
+      slivers: [
+        SliverList(
+            delegate: SliverChildListDelegate([
+          Container(
+            padding: EdgeInsets.symmetric(horizontal: 10.0),
+            child: Column(
+              children: [
+                _topBar(context),
                 Container(
-                  padding: EdgeInsets.symmetric(horizontal: 10.0),
-                  child: Column(
-                    children: [
-               _topBar(context),
-                               Container(
                     margin: EdgeInsets.symmetric(vertical: 20.0),
                     alignment: Alignment.centerLeft,
                     child: createText(
                         texto: 'Discover new places',
                         color: Colors.black,
-                        fontSize: 30.0)), 
-                        _sliderCards(),
-                         _headers(context, "Popular this week", "Show all"),
+                        fontSize: 30.0)),
+                _sliderCards(),
+                _headers(context, "Popular this week", "Show all"),
                 createPopularesCard(
                     context: context,
-                    image: AssetImage(
-                    'assets/stock.png'),
+                    image: AssetImage('assets/stock.png'),
                     title: "Andy & Cindy's Diner",
                     subtitle: "87 Botsford Circle Apt",
                     review: "4.8",
@@ -41,8 +39,7 @@ class ExploreTab extends StatelessWidget {
                     hasActionButton: true),
                 createPopularesCard(
                     context: context,
-                    image: AssetImage(
-                    'assets/stock.png'),
+                    image: AssetImage('assets/stock.png'),
                     title: "Andy & Cindy's Diner",
                     subtitle: "87 Botsford Circle Apt",
                     review: "4.8",
@@ -51,8 +48,7 @@ class ExploreTab extends StatelessWidget {
                     hasActionButton: true),
                 createPopularesCard(
                     context: context,
-                    image: AssetImage(
-                    'assets/stock.png'),
+                    image: AssetImage('assets/stock.png'),
                     title: "Andy & Cindy's Diner",
                     subtitle: "87 Botsford Circle Apt",
                     review: "4.8",
@@ -68,20 +64,14 @@ class ExploreTab extends StatelessWidget {
                     },
                     child: _headers(context, "Collections", "Show all")),
                 _sliderCollections()
-                    ],
-                  ),
-                ),
-    
-              ]
-            )
-            )
-        ],
-      )
-    );
+              ],
+            ),
+          ),
+        ]))
+      ],
+    ));
   }
 }
-
-
 
 Widget _topBar(BuildContext context) {
   return Row(
@@ -89,9 +79,9 @@ Widget _topBar(BuildContext context) {
       GestureDetector(
         onTap: () => Navigator.pushNamed(context, 'search'),
         child: Container(
-          width: 500,
+          width: 350,
           padding: EdgeInsets.all(10.0),
-          margin: EdgeInsets.only(left: 16),
+          margin: EdgeInsets.only(left: 16, top: 20.0),
           decoration: BoxDecoration(
               border: Border.all(color: Color.fromRGBO(234, 236, 239, 1.0)),
               borderRadius: BorderRadius.circular(20.0)),
@@ -111,43 +101,25 @@ Widget _topBar(BuildContext context) {
           ),
         ),
       ),
-      Container(
-        width: 45.0,
-        height: 45.0,
-        margin: EdgeInsets.only(left: 10),
-        decoration: BoxDecoration(
-            color: Color.fromRGBO(209, 209, 214, 1.0),
-            borderRadius: BorderRadius.circular(30)),
-        child: IconButton(
-            icon: Icon(
-              Icons.filter_list,
-              size: 30,
-              color: Colors.white,
-            ),
-            onPressed: () {
-             // Navigator.pushNamed(context, 'filter');
-            }),
-      )
     ],
   );
 }
 
 Widget _sliderCards() {
-
-    return SizedBox(
-        height: 350.0,
-        child: ListView.builder(
-            itemCount: 4,
-            scrollDirection: Axis.horizontal,
-            itemBuilder: (BuildContext context, int index) {
-              return _tarjeta(context);
-            }));
+  return SizedBox(
+      height: 350.0,
+      child: ListView.builder(
+          itemCount: 4,
+          scrollDirection: Axis.horizontal,
+          itemBuilder: (BuildContext context, int index) {
+            return _tarjeta(context);
+          }));
 }
 
 Widget _tarjeta(BuildContext context) {
   return GestureDetector(
     onTap: () {
-     // Navigator.pushNamed(context, 'place-detail');
+      Navigator.pushNamed(context, 'place-detail');
     },
     child: Container(
       margin: EdgeInsets.all(3.0),
@@ -159,8 +131,7 @@ Widget _tarjeta(BuildContext context) {
                 width: 210.0,
                 height: 250.0,
                 fit: BoxFit.cover,
-                image: AssetImage(
-                    'assets/stock.png')),
+                image: AssetImage('assets/stock.png')),
           ),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -194,7 +165,6 @@ Widget _tarjeta(BuildContext context) {
                           color: grey,
                           fontWeight: FontWeight.w500,
                           fontSize: 13.0)),
-                  
                 ],
               )
             ],
@@ -214,7 +184,7 @@ Widget _headers(BuildContext context, String textHeader, String textAction) {
       ),
       Spacer(),
       GestureDetector(
-        onTap: (){},
+        onTap: () {},
         child: Row(
           children: [
             Text(
@@ -245,7 +215,7 @@ Widget _sliderCollections() {
 Widget _tarjetaCollection(BuildContext context) {
   return GestureDetector(
     onTap: () {
-     // Navigator.pushNamed(context, 'collections');
+      // Navigator.pushNamed(context, 'collections');
     },
     child: Container(
       margin: EdgeInsets.all(10.0),
@@ -258,8 +228,7 @@ Widget _tarjetaCollection(BuildContext context) {
               width: 300,
               height: 150,
               fit: BoxFit.cover,
-              image: AssetImage(
-                      'assets/stock.png'),
+              image: AssetImage('assets/stock.png'),
             ),
           ),
         ],
