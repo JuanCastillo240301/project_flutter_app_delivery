@@ -10,6 +10,15 @@ class placeDetailPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
+      floatingActionButton: FloatingActionButton.extended(
+          onPressed: () {},
+          backgroundColor: orange,
+          label: createText(
+              texto: 'Anadir a cesta',
+              color: Colors.white,
+              fontSize: 17.0,
+              fontWeight: FontWeight.w600)),
       body: CustomScrollView(
         slivers: <Widget>[
           SliverAppBar(
@@ -63,7 +72,15 @@ class placeDetailPage extends StatelessWidget {
           ),
           SliverList(
               delegate: SliverChildListDelegate(
-            [_header(texto: 'Popular'), _sliderCards()],
+            [
+              _header(texto: 'Popular'),
+              _sliderCards(),
+              _header(texto: 'Full order'),
+              _menuList(context),
+              SizedBox(
+                height: 72,
+              )
+            ],
           ))
         ],
       ),
@@ -227,7 +244,7 @@ class placeDetailPage extends StatelessWidget {
 
   Widget _sliderCards() {
     return Container(
-        height: 350.0,
+        height: 250.0,
         padding: EdgeInsets.symmetric(horizontal: 10.0),
         child: ListView.builder(
             scrollDirection: Axis.horizontal,
@@ -272,8 +289,62 @@ class placeDetailPage extends StatelessWidget {
                           fontWeight: FontWeight.w500,
                           fontSize: 15.0)),
                 ),
+                Row(
+                  children: [
+                    Container(
+                      margin: EdgeInsets.only(top: 10.0),
+                      child: Text("Selecciona",
+                          style: TextStyle(
+                              color: orange,
+                              fontWeight: FontWeight.w500,
+                              fontSize: 15.0)),
+                    ),
+                    Container(
+                      margin: EdgeInsets.only(top: 10.0, left: 90),
+                      child: Image(
+                        width: 20,
+                        height: 20,
+                        fit: BoxFit.cover,
+                        image: AssetImage('assets/plus_order.png'),
+                      ),
+                    ),
+                  ],
+                )
               ],
             )
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _menuList(BuildContext context) {
+    return Column(
+      children: [
+        _menuItem(context, 'Citas', '2'),
+        _menuItem(context, 'Citas', '2'),
+        _menuItem(context, 'Citas', '2'),
+      ],
+    );
+  }
+
+  Widget _menuItem(BuildContext context, String texto, String itemCount) {
+    return Container(
+      decoration:
+          BoxDecoration(border: Border(bottom: BorderSide(color: grey))),
+      child: Container(
+        padding: EdgeInsets.only(left: 10.0),
+        child: Column(
+          children: [
+            ListTile(
+              title: createText(
+                  texto: texto, fontSize: 17.0, fontWeight: FontWeight.w300),
+              trailing: createText(
+                  texto: itemCount,
+                  fontSize: 17.0,
+                  fontWeight: FontWeight.w300),
+            ),
+            _sliderCards(),
           ],
         ),
       ),

@@ -3,7 +3,6 @@ import 'package:project_flutter_app_delivery/src/colors.dart';
 import 'package:project_flutter_app_delivery/src/features/presentation/common_widgets/header_text.dart';
 //Commons
 
-
 Widget createFavouritesCard(
     {required BuildContext context,
     double marginTop = 15.0,
@@ -24,7 +23,7 @@ Widget createFavouritesCard(
         right: marginRight,
         bottom: marginBottom,
         left: marginLeft),
-    padding: EdgeInsets.only(left: 20, top: 20, bottom: 20),
+    padding: EdgeInsets.only(left: 10, top: 20, bottom: 20),
     width: double.infinity,
     //decoration: getBoxDecorationWithShadows(),
     child: Row(
@@ -35,7 +34,7 @@ Widget createFavouritesCard(
               Image(width: 90.0, height: 90.0, fit: BoxFit.cover, image: image),
         ),
         Container(
-          padding: EdgeInsets.only(left: 55.0),
+          padding: EdgeInsets.only(left: 15.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -50,12 +49,12 @@ Widget createFavouritesCard(
                           fontWeight: FontWeight.bold,
                           fontSize: 17)),
                   SizedBox(
-                    width: 100.0,
+                    width: 30.0,
                   ),
                   IconButton(
                       icon: Icon(
                         Icons.bookmark,
-                        size: 35.0,
+                        size: 40.0,
                         color: isFavourite ? Colors.pink : Colors.grey[300],
                       ),
                       onPressed: () {})
