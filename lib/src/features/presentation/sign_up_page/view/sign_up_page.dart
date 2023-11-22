@@ -25,7 +25,7 @@ class SignUp extends StatelessWidget {
               Text('Create an account',style: TextStyle(
                               color: Theme.of(context).primaryColor,
                               fontWeight: FontWeight.bold,
-                              fontSize: 40.0
+                              fontSize: 30.0
                             ),
                             ),
                             _nameInput(context),
@@ -41,7 +41,7 @@ class SignUp extends StatelessWidget {
                  style: TextStyle(               
                                 color: Theme.of(context).primaryColor,
                                 fontWeight: FontWeight.w400,
-                                fontSize: 18.0
+                                fontSize: 10.0
                               ),
                               ),
                ),
@@ -58,7 +58,7 @@ class SignUp extends StatelessWidget {
 
 Widget _nameInput(BuildContext context){
       return Container(
-        margin: EdgeInsets.only(top: 40.0),
+        margin: EdgeInsets.only(top: 20.0),
         padding: EdgeInsets.only(left: 20.0),
         decoration: BoxDecoration(
             color: bgInputs, borderRadius: BorderRadius.circular(40.0)),

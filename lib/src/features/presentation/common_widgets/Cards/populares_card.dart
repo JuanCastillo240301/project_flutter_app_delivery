@@ -69,18 +69,7 @@ Widget createPopularesCard(
                                 color: grey,
                                 fontWeight: FontWeight.w500,
                                 fontSize: 13.0)),
-                        Container(
-                          margin: EdgeInsets.symmetric(horizontal: 15.0),
-                          width: 110.0,
-                          height: 18.0,
-                          child: hasActionButton
-                              ? createElevatedButton(
-                                  labelButton: buttonText,
-                                  labelFontSize: 11.0,
-                                  color: orange,
-                                  shape: StadiumBorder())
-                              : Text(''),
-                        )
+                        
                       ],
                     )
                   ],

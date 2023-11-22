@@ -118,7 +118,7 @@ Widget _sliderCards() {
 Widget _tarjeta(BuildContext context) {
   return GestureDetector(
     onTap: () {
-     // Navigator.pushNamed(context, 'place-detail');
+     Navigator.pushNamed(context, 'place-detail');
     },
     child: Container(
       margin: EdgeInsets.all(3.0),

@@ -85,7 +85,7 @@ Widget _sendbutton(BuildContext context){
 
 Widget _donebutton(BuildContext context){
       return createElevatedButton(
-                    height: 45.0,
+                    height: 37.0,
                     width: 335.0,
                     labelButton: 'DONE',
                     color: Colors.orange,
