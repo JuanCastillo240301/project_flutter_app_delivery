@@ -7,7 +7,7 @@ import 'package:project_flutter_app_delivery/src/features/data/Repositories/user
 import 'package:project_flutter_app_delivery/src/features/data/Repositories/users/UserBodyParameters.dart';
 import 'package:project_flutter_app_delivery/src/features/domain/Entities/User/UserEntity.dart';
 import 'package:project_flutter_app_delivery/src/features/domain/Interfaces/Interfaces.dart';
-import 'package:project_flutter_app_delivery/src/features/domain/UserCases/Auth/User/SaveUserDataUseCase/SaveUserDataUseCaseParameters.dart';
+import 'package:project_flutter_app_delivery/src/features/domain/UserCases/User/SaveUserDataUseCase/SaveUserDataUseCaseParameters.dart';
 import 'package:project_flutter_app_delivery/src/utils/helpers/ResultType/ResultType.dart';
 
 abstract class SaveUserDataUseCase {

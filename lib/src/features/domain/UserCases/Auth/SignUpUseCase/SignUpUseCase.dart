@@ -6,8 +6,8 @@ import 'package:project_flutter_app_delivery/src/features/data/Repositories/Auth
 import 'package:project_flutter_app_delivery/src/features/domain/Entities/Auth/SignUpEntity/SignUpEntity.dart';
 import 'package:project_flutter_app_delivery/src/features/domain/Entities/User/UserEntity.dart';
 import 'package:project_flutter_app_delivery/src/features/domain/Interfaces/Interfaces.dart';
-import 'package:project_flutter_app_delivery/src/features/domain/UserCases/Auth/User/SaveUserDataUseCase/SaveUserDataUseCase.dart';
-import 'package:project_flutter_app_delivery/src/features/domain/UserCases/Auth/User/SaveUserDataUseCase/SaveUserDataUseCaseParameters.dart';
+import 'package:project_flutter_app_delivery/src/features/domain/UserCases/User/SaveUserDataUseCase/SaveUserDataUseCase.dart';
+import 'package:project_flutter_app_delivery/src/features/domain/UserCases/User/SaveUserDataUseCase/SaveUserDataUseCaseParameters.dart';
 import 'package:project_flutter_app_delivery/src/utils/helpers/Dates/DateHelpers.dart';
 import 'package:project_flutter_app_delivery/src/utils/helpers/ResultType/ResultType.dart';
 import 'package:project_flutter_app_delivery/src/utils/helpers/UserPhotos/UserPhotoHelper.dart';

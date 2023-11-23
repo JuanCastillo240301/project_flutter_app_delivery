@@ -16,8 +16,8 @@ class WelcomePage extends StatelessWidget {
               decoration: const BoxDecoration(
                   image: DecorationImage(
                     fit: BoxFit.cover,
-                    image: AssetImage(
-                    'assets/stock.png'),
+                 image: NetworkImage(
+                'https://images.unsplash.com/photo-1502301103665-0b95cc738daf?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60'),
                   )
                   ),
               child: BackdropFilter(

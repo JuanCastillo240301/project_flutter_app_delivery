@@ -1,9 +1,27 @@
 import 'package:flutter/material.dart';
-
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:project_flutter_app_delivery/src/features/presentation/StateProviders/ErrorStateProvider.dart';
+import 'package:project_flutter_app_delivery/src/features/presentation/StateProviders/LoadingStateProvider.dart';
+import 'package:provider/provider.dart';
 //Routes
 import 'package:project_flutter_app_delivery/src/routes/routes.dart';
 
-void main() => runApp(const MyApp());
+void main() => runApp(const AppState());
+
+
+class AppState extends StatelessWidget {
+  const AppState({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return MultiProvider(providers: [
+      ChangeNotifierProvider(create: (_) => ErrorStateProvider()),
+      ChangeNotifierProvider(create: (_) => LoadingStateProvider())
+    ],
+    child: MyApp());
+  }
+}
+
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -15,6 +33,15 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       routes: routes,
       initialRoute: 'welcome',
+            localizationsDelegates: const [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: const [
+        Locale('en', ''), // English, no country code
+        Locale('es', ''), // Spanish, no country code
+      ],
       theme: ThemeData(
         primaryColor: Color.fromARGB(255, 0, 0, 0),
         hintColor: const Color.fromRGBO(10, 31, 68, 1.0),

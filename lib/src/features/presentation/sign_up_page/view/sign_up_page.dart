@@ -1,13 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:project_flutter_app_delivery/src/Base/Views/BaseView.dart';
 import 'package:project_flutter_app_delivery/src/colors.dart';
+import 'package:project_flutter_app_delivery/src/features/presentation/StateProviders/LoadingStateProvider.dart';
+import 'package:project_flutter_app_delivery/src/features/presentation/common_widgets/TextFormFields/CustomTextFormField.dart';
 import 'package:project_flutter_app_delivery/src/features/presentation/common_widgets/rounded_button.dart';
+import 'package:project_flutter_app_delivery/src/features/presentation/sign_up_page/viewModel/SignUpViewModel.dart';
+import 'package:project_flutter_app_delivery/src/utils/helpers/ResultType/ResultType.dart';
+import 'package:provider/provider.dart';
 
-class SignUp extends StatelessWidget {
-  const SignUp({super.key});
+class SignUp extends StatelessWidget with BaseView {
+  
+    final SignUpViewModel _viewModel;
+
+  SignUp({super.key,  SignUpViewModel? viewModel }) : _viewModel = viewModel ?? DefaultSignUpViewModel();
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+
+       _viewModel.initState(loadingStateProvider: Provider.of<LoadingStateProvider>(context));
+
+    return _viewModel.loadingState.isLoading ? loadingView : Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0.0,
@@ -17,8 +29,16 @@ class SignUp extends StatelessWidget {
         }
         ),
       ),
-      body: Center(
-        child: Container(
+      body: CustomScrollView(
+        slivers: [
+          SliverList(delegate: 
+          SliverChildListDelegate(
+          [
+            Center(
+        child: Form(
+          key: _viewModel.formKey,
+          autovalidateMode: AutovalidateMode.onUserInteraction,
+          child: Container(
           padding: EdgeInsets.all(40.0),
           child: Column(
             children: [
@@ -28,12 +48,35 @@ class SignUp extends StatelessWidget {
                               fontSize: 30.0
                             ),
                             ),
-                            _nameInput(context),
-                            _emailInput(context),
-                            _phoneInput(context),
-                            _datebirthInput(context),
-                            _passwordInput(context),
-                            _sendbutton(context),
+                            CustomTextFormField(textFormFieldType: CustomTextFormFieldType.username,
+                                            hintext: 'Username',
+                                            delegate: _viewModel),
+                        CustomTextFormField(textFormFieldType: CustomTextFormFieldType.email,
+                            hintext: 'Email',
+                            delegate: _viewModel),
+                        CustomTextFormField(textFormFieldType: CustomTextFormFieldType.phone,
+                            hintext: 'Phone',
+                            delegate: _viewModel),
+                             GestureDetector(
+                          onTap: () => _selectDate(context),
+                          child: AbsorbPointer(
+                            child: CustomTextFormField(
+                                textFormFieldType: CustomTextFormFieldType.dateOfBirth,
+                                hintext: 'Date of Birth',
+                                delegate: _viewModel,
+                                controller: _viewModel.dateController),
+                          ),
+                        ),
+                        CustomTextFormField(textFormFieldType: CustomTextFormFieldType.password,
+                            hintext: 'Password',
+                            delegate: _viewModel),
+                        createElevatedButton(
+                            context: context,
+                            color: orange,
+                            labelButton: 'Sign up',
+                            func: () {
+                              _ctaTapped(context);
+                            }),
                              Container(
                 padding: EdgeInsets.symmetric(horizontal:20.0, vertical: 25.0),
                  child: Text('By clicking Sign up you agree to the following Terms and Conditions without reservation.',
@@ -48,118 +91,47 @@ class SignUp extends StatelessWidget {
 
             ],
           ),
+        ), 
         ),
       ),
+          ]
+          ))
+        ],
+      )
     );
   }
+
+
 }
 
 
+extension UserActions on SignUp {
+  void _selectDate(BuildContext context) async {
+    final DateTime? picked = await showDatePicker(context: context,
+                                                  initialDate: _viewModel.selectedDate,
+                                                  firstDate: DateTime(1960,1),
+                                                  lastDate: DateTime(2100),
+                                                  locale: Locale('es', ''));
 
-Widget _nameInput(BuildContext context){
-      return Container(
-        margin: EdgeInsets.only(top: 20.0),
-        padding: EdgeInsets.only(left: 20.0),
-        decoration: BoxDecoration(
-            color: bgInputs, borderRadius: BorderRadius.circular(40.0)),
-        child: TextFormField(
-          keyboardType: TextInputType.name,
-          decoration: InputDecoration(
-              hintText: 'name',
-              border: OutlineInputBorder(borderSide: BorderSide.none
-              )
-          ),
-
-        )
-        );
-}
-
-
-Widget _emailInput(BuildContext context){
-      return Container(
-        margin: EdgeInsets.only(top: 20.0),
-        padding: EdgeInsets.only(left: 20.0),
-        decoration: BoxDecoration(
-            color: bgInputs, borderRadius: BorderRadius.circular(40.0)),
-        child: TextFormField(
-          keyboardType: TextInputType.emailAddress,
-          decoration: InputDecoration(
-              hintText: 'Email',
-              border: OutlineInputBorder(borderSide: BorderSide.none
-              )
-          ),
-         // onChanged: (newValue) =>// viewModel.loginModel.email = newValue,
-          //validator: (value) => //EmailFormValidator.validateEmail(email: value ?? ''),
-        )
-        );
-}
-Widget _phoneInput(BuildContext context){
-      return Container(
-        margin: EdgeInsets.only(top: 20.0),
-        padding: EdgeInsets.only(left: 20.0),
-        decoration: BoxDecoration(
-            color: bgInputs, borderRadius: BorderRadius.circular(40.0)),
-        child: TextFormField(
-          keyboardType: TextInputType.phone,
-          decoration: InputDecoration(
-              hintText: 'Phone',
-              border: OutlineInputBorder(borderSide: BorderSide.none
-              )
-          ),
-         // onChanged: (newValue) =>// viewModel.loginModel.email = newValue,
-          //validator: (value) => //EmailFormValidator.validateEmail(email: value ?? ''),
-        )
-        );
-}
-
-Widget _datebirthInput(BuildContext context){
-      return Container(
-        margin: EdgeInsets.only(top: 20.0),
-        padding: EdgeInsets.only(left: 20.0),
-        decoration: BoxDecoration(
-            color: bgInputs, borderRadius: BorderRadius.circular(40.0)),
-        child: TextFormField(
-          keyboardType: TextInputType.datetime,
-          decoration: InputDecoration(
-              hintText: 'Birth day',
-              border: OutlineInputBorder(borderSide: BorderSide.none
-              )
-          ),
-         // onChanged: (newValue) =>// viewModel.loginModel.email = newValue,
-          //validator: (value) => //EmailFormValidator.validateEmail(email: value ?? ''),
-        )
-        );
-}
-
-Widget _passwordInput(BuildContext context){
-      return Container(
-        margin: EdgeInsets.only(top: 20.0, bottom: 30.0),
-        padding: EdgeInsets.only(left: 20.0),
-        decoration: BoxDecoration(
-            color: bgInputs, borderRadius: BorderRadius.circular(40.0)),
-        child: TextFormField(
-          keyboardType: TextInputType.visiblePassword,
-          obscureText: true,
-          decoration: InputDecoration(
-              hintText: 'password',
-              border: OutlineInputBorder(borderSide: BorderSide.none
-              )
-          ),
-         // onChanged: (newValue) =>// viewModel.loginModel.email = newValue,
-          //validator: (value) => //EmailFormValidator.validateEmail(email: value ?? ''),
-        )
-        );
-}
-
-Widget _sendbutton(BuildContext context){
-      return createElevatedButton(
-                    height: 45.0,
-                    width: 550.0,
-                    labelButton: 'Sign up',
-                    color: Colors.orange,
-                    shape: const StadiumBorder(),
-                    func: () {
-                      
-                    // _showAlert(context);
-                    });
+    if (picked != null && picked != _viewModel.selectedDate) {
+      _viewModel.signUpModel?.date = "${ picked.toLocal().day }/${ picked.toLocal().month }/${ picked.toLocal().year }";
+      _viewModel.dateController.text = "${ picked.toLocal().day }/${ picked.toLocal().month }/${ picked.toLocal().year }";
+    }
   }
+
+  void _ctaTapped(BuildContext context) {
+    if (_viewModel.isFormValidate()) {
+      _viewModel.signUp().then( (result) {
+         switch (result.status) {
+           case ResultStatus.success:
+             Navigator.pushNamed(context, 'tabs');
+             break;
+           case ResultStatus.error:
+             errorStateProvider.setFailure(context: context,
+                                           value: result.error!);
+             break;
+         }
+      });
+    }
+  }
+}

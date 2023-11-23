@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:project_flutter_app_delivery/src/features/presentation/common_widgets/Alerts/ErrorAlertView.dart';
 import 'package:project_flutter_app_delivery/src/features/presentation/common_widgets/Alerts/alert_dialog.dart';
 import 'package:project_flutter_app_delivery/src/features/presentation/common_widgets/rounded_button.dart';
 import 'package:project_flutter_app_delivery/src/features/presentation/tabs/explore_tab/view/explore_tab.dart';
@@ -81,6 +82,7 @@ Widget _bottomNavigationBar(BuildContext context){
 }
 
 Future _getLocation(BuildContext context) async{
+  // ErrorAlertView.showErrorAlertDialog(context: context, subtitle: "probando alert", ctaButtonAction:(){Navigator.pop(context);} );
   await showAlertDialog(
     context, 
     AssetImage('assets/location.png'), 
