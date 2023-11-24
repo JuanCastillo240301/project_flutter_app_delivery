@@ -53,7 +53,7 @@ class _ProfileTabState extends State<ProfileTab> {
         children: [
           CircleAvatar(
             backgroundImage: NetworkImage(
-                'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8YXZhdGFyfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60'),
+                'https://lh3.googleusercontent.com/a/ACg8ocIHoNI2WNV2deDNhANmBZMVcotxhmjeuqiNCXntTcGnFqE=s432-c-no'),
             radius: 50,
           ),
           Column(
@@ -65,7 +65,7 @@ class _ProfileTabState extends State<ProfileTab> {
                 child: Row(
                   children: [
                     createText(
-                        texto: 'Cameron Cook',
+                        texto: 'Juan Castillo',
                         fontSize: 20,
                         fontWeight: FontWeight.w600),
                     IconButton(

@@ -48,8 +48,6 @@ class _MyOrderState extends State<MyOrder> {
                     child: Column(
                       children: [
                         _orders(context),
-                        _orders(context),
-                        _orders(context),
                       ],
                     ),
                   )
@@ -88,8 +86,7 @@ Widget _cardOrders(BuildContext context) {
         Column(
           children: [
             _items(context),
-            _items(context),
-            _items(context),
+            _items2(context),
           ],
         )
       ],
@@ -106,7 +103,7 @@ Widget _items(BuildContext context) {
         children: [
           Container(
             margin: EdgeInsets.only(top: 10.0),
-            child: Text("Andy & Cindy's Diner",
+            child: Text("Buffet",
                 style: TextStyle(
                     color: Colors.black,
                     fontWeight: FontWeight.bold,
@@ -114,7 +111,36 @@ Widget _items(BuildContext context) {
           ),
           Container(
             alignment: Alignment.centerLeft,
-            child: Text("cita",
+            child: Text("299",
+                style: TextStyle(
+                    color: grey, fontWeight: FontWeight.w500, fontSize: 15.0)),
+          ),
+        ],
+      ),
+      trailing: Text("3",
+          style: TextStyle(
+              color: grey, fontWeight: FontWeight.w500, fontSize: 15.0)),
+    ),
+  );
+}
+Widget _items2(BuildContext context) {
+  return Container(
+    decoration: BoxDecoration(border: Border(bottom: BorderSide(color: grey))),
+    child: ListTile(
+      title: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            margin: EdgeInsets.only(top: 10.0),
+            child: Text("Buffet + bebidas",
+                style: TextStyle(
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 17.0)),
+          ),
+          Container(
+            alignment: Alignment.centerLeft,
+            child: Text("399",
                 style: TextStyle(
                     color: grey, fontWeight: FontWeight.w500, fontSize: 15.0)),
           ),
@@ -126,7 +152,6 @@ Widget _items(BuildContext context) {
     ),
   );
 }
-
 Widget _cardOrderTopContent() {
   return Container(
     padding: EdgeInsetsDirectional.symmetric(vertical: 10.0),
@@ -136,7 +161,7 @@ Widget _cardOrderTopContent() {
         Container(
           margin: EdgeInsets.only(top: 7, bottom: 7, right: 7),
           child: createText(
-              texto: 'Nombre del establecimiento',
+              texto: 'Restaurante de lujo',
               fontSize: 20.0,
               color: black,
               fontWeight: FontWeight.bold),
@@ -150,7 +175,7 @@ Widget _cardOrderTopContent() {
                 color: grey,
               ),
               createText(
-                texto: 'calle ejemplo',
+                texto: 'Av. Constituyentes',
                 color: Colors.grey,
                 fontWeight: FontWeight.w500,
                 fontSize: 15.0,

@@ -68,9 +68,11 @@ class _ProfileDetailPageState extends State<ProfileDetailPage> {
                   children: [
                  Transform.translate(
           offset: Offset(0, -15),
-                      child: avatarView(
-                        AvatarImage:'assets/stock.png'
-                          ),
+                      child: CircleAvatar(
+            backgroundImage: NetworkImage(
+                'https://lh3.googleusercontent.com/a/ACg8ocIHoNI2WNV2deDNhANmBZMVcotxhmjeuqiNCXntTcGnFqE=s432-c-no'),
+            radius: 50,
+          ),
                     ),
                     TextFieldsProfileDetailView()
                   ],

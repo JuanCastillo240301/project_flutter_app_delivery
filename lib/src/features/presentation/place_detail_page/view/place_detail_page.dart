@@ -31,7 +31,7 @@ class placeDetailPage extends StatelessWidget {
                     width: double.infinity,
                     height: 395,
                     fit: BoxFit.cover,
-                    image: AssetImage('assets/stock.png')),
+                    image:NetworkImage('https://img.freepik.com/foto-gratis/restaurante-pared-verde-mesa-madera-hilera-mesas-jardinera-planta-al-fondo_188544-37710.jpg?w=1060&t=st=1700815599~exp=1700816199~hmac=015032e5d5cae16cd392017a4d0b6436d5ce022b93e8687da49e5bf38ffd5fb0'),),
                 Container(
                   width: double.infinity,
                   height: 395,
@@ -94,7 +94,7 @@ class placeDetailPage extends StatelessWidget {
           padding: EdgeInsets.symmetric(horizontal: 30.0),
           margin: EdgeInsets.symmetric(vertical: 7.0),
           child: createText(
-            texto: 'Hospital General de Celaya',
+            texto: 'Restaurante de Lujo',
             color: Colors.white,
             fontWeight: FontWeight.bold,
             fontSize: 30.0,
@@ -109,7 +109,7 @@ class placeDetailPage extends StatelessWidget {
                 color: grey,
               ),
               createText(
-                texto: 'calle ejemplo',
+                texto: 'Av. Constituyentes',
                 color: Colors.white,
                 fontWeight: FontWeight.w500,
                 fontSize: 15.0,
@@ -145,14 +145,14 @@ class placeDetailPage extends StatelessWidget {
                     size: 19.0,
                   ),
                   createText(
-                      texto: '4.5',
+                      texto: '4.2',
                       color: Colors.white,
                       fontSize: 15.0,
                       fontWeight: FontWeight.bold)
                 ],
               ),
               createText(
-                  texto: '122 ratings',
+                  texto: '55 ratings',
                   color: grey,
                   fontSize: 15.0,
                   fontWeight: FontWeight.w500)
@@ -178,7 +178,7 @@ class placeDetailPage extends StatelessWidget {
                     size: 19.0,
                   ),
                   createText(
-                      texto: '137k',
+                      texto: '2',
                       color: Colors.white,
                       fontSize: 15.0,
                       fontWeight: FontWeight.bold)
@@ -211,7 +211,7 @@ class placeDetailPage extends StatelessWidget {
                     size: 19.0,
                   ),
                   createText(
-                      texto: '350',
+                      texto: '3',
                       color: Colors.white,
                       fontSize: 15.0,
                       fontWeight: FontWeight.bold)
@@ -268,7 +268,7 @@ class placeDetailPage extends StatelessWidget {
                   width: 200.0,
                   height: 150.0,
                   fit: BoxFit.cover,
-                  image: AssetImage('assets/stock.png')),
+                  image:NetworkImage('https://img.freepik.com/foto-gratis/restaurante-pared-verde-mesa-madera-hilera-mesas-jardinera-planta-al-fondo_188544-37710.jpg?w=1060&t=st=1700815599~exp=1700816199~hmac=015032e5d5cae16cd392017a4d0b6436d5ce022b93e8687da49e5bf38ffd5fb0'),),
             ),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -283,7 +283,7 @@ class placeDetailPage extends StatelessWidget {
                 ),
                 Container(
                   alignment: Alignment.centerLeft,
-                  child: Text("10 pesos",
+                  child: Text("299 pesos",
                       style: TextStyle(
                           color: grey,
                           fontWeight: FontWeight.w500,
@@ -321,8 +321,8 @@ class placeDetailPage extends StatelessWidget {
   Widget _menuList(BuildContext context) {
     return Column(
       children: [
-        _menuItem(context, 'Citas', '2'),
-        _menuItem(context, 'Citas', '2'),
+        _menuItem(context, 'Solo Buffet', '2'),
+        _menuItem(context, 'Buffet + bebida', '2'),
         _menuItem(context, 'Citas', '2'),
       ],
     );

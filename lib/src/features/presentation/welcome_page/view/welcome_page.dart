@@ -33,33 +33,40 @@ class WelcomePage extends StatelessWidget {
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 50.0),
                   child: createText(
-                      texto: 'DELIVERED FAST FOOD\nTO YOUR\nDOOR',
+                      texto: 'RESERVATION\nON YOURS\nCITY',
                       color: Colors.white,
                       fontSize: 40.0),
                 ),
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 50.0, vertical: 30.0),
                   child: const Text(
-                      'Set exact location to find the right restaurants near you.',
+                      'Set exact location to find the right places near you.',
                       style: TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.w400,
                           fontSize: 17.0)),
                 ),
                 createElevatedButton(
-                    labelButton: 'Log in',
+                    labelButton: 'Log in with Email/Password',
                     color: Colors.orange,
                     shape: const StadiumBorder(),
                     func: () {
                       Navigator.pushNamed(context, 'login');
                     }),
                 createElevatedButton(
-                    labelButton: 'Connect with facebook',
+                    labelButton: 'Connect with Google',
                     color: Colors.blue,
                     isWithIcon: true,
                     shape: const StadiumBorder(),
-                    icon: const AssetImage('assets/facebook.png'),
-                    func: () => print("goToFacebook"))
+                    icon: const AssetImage('assets/google1.png'),
+                    func: () => print("goToGoogle")),
+                    createElevatedButton(
+                    labelButton: 'Connect with Github',
+                    color: Colors.blueGrey,
+                    isWithIcon: true,
+                    shape: const StadiumBorder(),
+                    icon: const AssetImage('assets/github1.png'),
+                    func: () => print("goToGithub"))
               ],
             )
           ],

@@ -67,7 +67,7 @@ Widget _bottomNavigationBar(BuildContext context){
     ),
     BottomNavigationBarItem(
       icon: Icon(Icons.assignment),
-      label: 'My order'
+      label: 'reservation'
     ),
     BottomNavigationBarItem(
       icon: Icon(Icons.book),

@@ -41,31 +41,31 @@ class SearchPage extends StatelessWidget {
                     SizedBox(height: 10.0,),
                     createPopularesCard(
                       context: context, 
-                    image: AssetImage('assets/stock.png'), 
-                    title: "Andy & Cindy's Diner",
-                    subtitle: "87 Botsford Circle Apt",
-                    review: "4.8",
-                    ratings: "(233 ratings)",
+                    image: NetworkImage('https://img.freepik.com/foto-gratis/superficie-madera-mirando-restaurante-vacio_23-2147701348.jpg?w=826&t=st=1700815666~exp=1700816266~hmac=9c571db4eb3cf3351547d34e4ab9dca4ce09b786b867dd98b8c052d66663b254'),
+                    title: "Restaurante de Lujo",
+                    subtitle: "Av. Constituyentes",
+                    review: "4.2",
+                    ratings: "(22 ratings)",
                     buttonText: 'Delivery',
                     hasActionButton: false),
                     SizedBox(height: 10.0,),
                     createPopularesCard(
                       context: context, 
-                    image: AssetImage('assets/stock.png'), 
+                    image: NetworkImage('https://img.freepik.com/foto-gratis/restaurante-pared-verde-mesa-madera-hilera-mesas-jardinera-planta-al-fondo_188544-37710.jpg?w=1060&t=st=1700815599~exp=1700816199~hmac=015032e5d5cae16cd392017a4d0b6436d5ce022b93e8687da49e5bf38ffd5fb0'),
                     title: "Andy & Cindy's Diner",
-                    subtitle: "87 Botsford Circle Apt",
+                    subtitle: "C. Adolfo Lopez mateos",
                     review: "4.8",
-                    ratings: "(233 ratings)",
+                    ratings: "(30 ratings)",
                     buttonText: 'Delivery',
                     hasActionButton: false),
                     SizedBox(height: 10.0,),
                     createPopularesCard(
                       context: context, 
-                    image: AssetImage('assets/stock.png'), 
-                    title: "Andy & Cindy's Diner",
-                    subtitle: "87 Botsford Circle Apt",
-                    review: "4.8",
-                    ratings: "(233 ratings)",
+                    image: NetworkImage('https://img.freepik.com/foto-gratis/interior-restaurante_1127-3394.jpg?w=996&t=st=1700815738~exp=1700816338~hmac=222216c9ba250eee7032f7d24da1558543892cec29be75cbd7fbd3a7743170a8'),
+                    title: "Grill House",
+                    subtitle: "Av. Libertadores",
+                    review: "3.9",
+                    ratings: "(3 ratings)",
                     buttonText: 'Delivery',
                     hasActionButton: false),
                   ],
@@ -108,7 +108,7 @@ Widget _sliderCards() {
     return SizedBox(
         height: 350.0,
         child: ListView.builder(
-            itemCount: 4,
+            itemCount: 1,
             scrollDirection: Axis.horizontal,
             itemBuilder: (BuildContext context, int index) {
               return _tarjeta(context);
@@ -130,15 +130,14 @@ Widget _tarjeta(BuildContext context) {
                 width: 210.0,
                 height: 250.0,
                 fit: BoxFit.cover,
-                image: AssetImage(
-                    'assets/stock.png')),
+                image: NetworkImage('https://img.freepik.com/foto-gratis/superficie-madera-mirando-restaurante-vacio_23-2147701348.jpg?w=826&t=st=1700815666~exp=1700816266~hmac=9c571db4eb3cf3351547d34e4ab9dca4ce09b786b867dd98b8c052d66663b254'),),
           ),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
                 margin: EdgeInsets.only(top: 10.0),
-                child: Text("Andy & Cindy's Diner",
+                child: Text("Restaurante de lujo",
                     style: TextStyle(
                         color: Colors.black,
                         fontWeight: FontWeight.bold,
@@ -146,7 +145,7 @@ Widget _tarjeta(BuildContext context) {
               ),
               Container(
                 alignment: Alignment.centerLeft,
-                child: Text("87 Botsford Circle Apt",
+                child: Text("Av. Constituyrntes",
                     style: TextStyle(
                         color: grey,
                         fontWeight: FontWeight.w500,
