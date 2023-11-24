@@ -15,14 +15,14 @@ import 'package:project_flutter_app_delivery/src/features/presentation/sign_up_p
 import 'package:project_flutter_app_delivery/src/features/presentation/tabs/tabs_page.dart';
 
 final routes = <String, WidgetBuilder>{
-  'welcome': (BuildContext context) => const WelcomePage(),
-  'login': (BuildContext context) => const LoginPage(),
-  'forgot': (BuildContext context) => const ForgotPassword(),
+  'welcome': (BuildContext context) =>  WelcomePage(),
+  'login': (BuildContext context) =>  LoginPage(),
+  'forgot': (BuildContext context) =>  ForgotPassword(),
   'signup': (BuildContext context) =>  SignUp(),
   'tabs': (BuildContext context) =>  TabsPage(),
-  'search': (BuildContext context) => const SearchPage(),
-  'collections': (BuildContext context) => const collectionsPage(),
-  'collections-detail': (BuildContext context) => const collectionsDetailPage(),
-  'place-detail': (BuildContext context) => const placeDetailPage(),
-  'profile-detail': (BuildContext context) => const ProfileDetailPage(),
+  'search': (BuildContext context) =>  SearchPage(),
+  'collections': (BuildContext context) =>  collectionsPage(),
+  'collections-detail': (BuildContext context) =>  collectionsDetailPage(),
+  'place-detail': (BuildContext context) =>  placeDetailPage(),
+  'profile-detail': (BuildContext context) =>  ProfileDetailPage(),
 };
