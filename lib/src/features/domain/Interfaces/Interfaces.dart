@@ -2,7 +2,9 @@
 
 
 import 'package:project_flutter_app_delivery/src/Base/ApiService/AppError.dart';
+import 'package:project_flutter_app_delivery/src/Managers/PlacesManager/Decodables/PlaceList/PlaceListDecodable.dart';
 import 'package:project_flutter_app_delivery/src/features/data/Decodables/Decodables/Auth/UserAuthData/UserAuthDataDecodable.dart';
+import 'package:project_flutter_app_delivery/src/features/data/Decodables/Decodables/Collections/CollectionsDecodable.dart';
 import 'package:project_flutter_app_delivery/src/features/data/Decodables/Decodables/User/UserDecodable.dart';
 import 'package:project_flutter_app_delivery/src/features/data/Repositories/Auth/SignInRepository/SignInBodyParameters.dart';
 import 'package:project_flutter_app_delivery/src/features/data/Repositories/Auth/SignUpRepository/SignUpRepositoryParameters.dart';
@@ -48,4 +50,17 @@ abstract class FetchLocalStorageRepository {
 
 abstract class RemoveLocalStorageRepository {
   Future<void> removeInLocalStorage({ required String key });
+}
+// * Collections Repositories
+abstract class CollectionsRepository {
+  Future<CollectionsDecodable> fetchCollections();
+}
+// * Places Repositories
+abstract class PlaceListRepository {
+  Future<PlaceListDecodable> fetchPlaceList();
+  Future<PlaceListDecodable> fetchNoveltyPlaceList();
+  Future<PlaceListDecodable> fetchPopularPlacesList();
+  Future<PlaceListDecodable> fetchPlacesListByCategory({ required int categoryId });
+  Future<PlaceListDecodable> fetchPlacesListByQuery({ required String query });
+  Future<PlaceListDecodable> fetchPlacesListByRecentSearches({ required List<String> placeIds });
 }
