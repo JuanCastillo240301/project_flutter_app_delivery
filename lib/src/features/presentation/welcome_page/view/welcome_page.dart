@@ -1,25 +1,51 @@
 import 'dart:ui';
-
+import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
+import 'package:project_flutter_app_delivery/src/Base/Views/BaseView.dart';
+import 'package:project_flutter_app_delivery/src/colors.dart';
+import 'package:project_flutter_app_delivery/src/features/presentation/StateProviders/LoadingStateProvider.dart';
 import 'package:project_flutter_app_delivery/src/features/presentation/common_widgets/header_text.dart';
 import 'package:project_flutter_app_delivery/src/features/presentation/common_widgets/rounded_button.dart';
+import 'package:project_flutter_app_delivery/src/features/presentation/welcome_page/viewModel/WelcomePageViewModel.dart';
+import 'package:project_flutter_app_delivery/src/utils/helpers/ResultType/ResultType.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:github_sign_in/github_sign_in.dart';
+import 'package:project_flutter_app_delivery/src/features/domain/UserCases/Auth/GoogleSignInUseCase/GoogleSignInUseCase.dart';
 
-class WelcomePage extends StatelessWidget {
-  const WelcomePage({super.key});
+class WelcomePage extends StatefulWidget with BaseView {
+  WelcomePage({ Key? key }) : super(key: key);
 
   @override
+  State<WelcomePage> createState() => _WelcomePageState();
+}
+
+class _WelcomePageState extends State<WelcomePage> with BaseView {
+// Almacena la información del usuario
+  final WelcomePageViewModel viewModel;
+  _WelcomePageState({ WelcomePageViewModel? welcomePageViewModel })
+   : viewModel = welcomePageViewModel ?? DefaultWelcomePageViewModel();
+    final FirebaseAuth _auth = FirebaseAuth.instance;
+  final GitHubSignIn _gitHubSignIn = GitHubSignIn(
+    clientId: '2969c2ed80f6da9a20bf',
+    clientSecret: '8db41435904c842909179294403e3363eae74ea4',
+    redirectUrl: 'https://project-flutter-app-delivery.firebaseapp.com/__/auth/handler',);
+  @override
   Widget build(BuildContext context) {
-    return Scaffold(
+
+    viewModel.initState(loadingStateProvider: Provider.of<LoadingStateProvider>(context));
+
+    return viewModel.loadingState.isLoading
+        ? loadingView
+        : Scaffold(
         body: Stack(
           children: [
             Container(
               decoration: const BoxDecoration(
                   image: DecorationImage(
                     fit: BoxFit.cover,
-                 image: NetworkImage(
-                'https://images.unsplash.com/photo-1502301103665-0b95cc738daf?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60'),
-                  )
-                  ),
+                    image: NetworkImage(
+                        'https://images.unsplash.com/photo-1502301103665-0b95cc738daf?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60'),
+                  )),
               child: BackdropFilter(
                 filter: ImageFilter.blur(sigmaX: 1.0, sigmaY: 1.0),
                 child: Container(
@@ -33,44 +59,93 @@ class WelcomePage extends StatelessWidget {
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 50.0),
                   child: createText(
-                      texto: 'RESERVATION\nON YOURS\nCITY',
+                      texto: 'DELIVERED FAST FOOD\nTO YOUR\nDOOR',
                       color: Colors.white,
                       fontSize: 40.0),
                 ),
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 50.0, vertical: 30.0),
                   child: const Text(
-                      'Set exact location to find the right places near you.',
+                      'Set exact location to find the right restaurants near you.',
                       style: TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.w400,
                           fontSize: 17.0)),
                 ),
                 createElevatedButton(
-                    labelButton: 'Log in with Email/Password',
-                    color: Colors.orange,
+                    labelButton: 'Log in',
+                    color: orange,
                     shape: const StadiumBorder(),
                     func: () {
                       Navigator.pushNamed(context, 'login');
                     }),
-                createElevatedButton(
+                    createElevatedButton(
                     labelButton: 'Connect with Google',
                     color: Colors.blue,
                     isWithIcon: true,
                     shape: const StadiumBorder(),
                     icon: const AssetImage('assets/google1.png'),
-                    func: () => print("goToGoogle")),
-                    createElevatedButton(
+                    func: () =>   googleSignInTapped(context)),
+                     createElevatedButton(
                     labelButton: 'Connect with Github',
                     color: Colors.blueGrey,
                     isWithIcon: true,
                     shape: const StadiumBorder(),
                     icon: const AssetImage('assets/github1.png'),
-                    func: () => print("goToGithub"))
+                    func: () =>  githubSignInTapped(context)),
               ],
             )
           ],
         )
     );
   }
+// Método para manejar la autenticación con GitHub
+void githubSignInTapped(BuildContext context) async {
+  try {
+    final GitHubSignInResult result = await _gitHubSignIn.signIn(context);
+
+    final AuthCredential githubAuthCredential = GithubAuthProvider.credential(result.token!);
+
+    final UserCredential userCredential = await _auth.signInWithCredential(githubAuthCredential);
+
+    // Verifica si el inicio de sesión fue exitoso
+    if (userCredential.user != null) {
+      // Accede a la información del usuario
+      final User user = userCredential.user!;
+      
+      // Imprime el nombre y la URL de la foto del perfil en la consola
+      String displayName = user.displayName ?? user.providerData.first.displayName ?? 'Usuario Desconocido';
+      print('Nombre del usuario: $displayName');
+      GlobalUserData.name = displayName;
+      print('URL de la foto del perfil: ${user.photoURL}');
+      GlobalUserData.photoURL = user.photoURL;
+
+      // Redirige a la pantalla principal después del inicio de sesión exitoso
+      Navigator.pushNamed(context, 'tabs');
+    } else {
+      // Maneja el caso de inicio de sesión no exitoso según tus necesidades
+    }
+  } catch (e) {
+    print('Error al iniciar sesión con GitHub: $e');
+    // Maneja el error según tus necesidades
+  }
 }
+}
+
+extension UserActions on _WelcomePageState {
+  googleSignInTapped(BuildContext context) {
+    viewModel.signInWithGoogle().then((result) {
+        switch (result.status) {
+          case ResultStatus.success:
+            coordinator.showTabsPage(context: context);
+            break;
+          case ResultStatus.error:
+            errorStateProvider.setFailure(context: context, value: result.error!);
+            break;
+        }
+    });
+  }
+}
+
+
+

@@ -13,7 +13,7 @@ import 'package:project_flutter_app_delivery/src/features/presentation/forgot_pa
 import 'package:project_flutter_app_delivery/src/features/presentation/sign_up_page/view/sign_up_page.dart';
 
 //tabs
-import 'package:project_flutter_app_delivery/src/features/presentation/tabs/tabs_page.dart';
+import 'package:project_flutter_app_delivery/src/features/presentation/tabs/tabs_page/view/tabs_page.dart';
 
 final routes = <String, WidgetBuilder>{
   'welcome': (BuildContext context) =>  WelcomePage(),

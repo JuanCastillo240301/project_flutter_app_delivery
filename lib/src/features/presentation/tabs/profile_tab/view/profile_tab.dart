@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:project_flutter_app_delivery/src/colors.dart';
+import 'package:project_flutter_app_delivery/src/features/domain/UserCases/Auth/GoogleSignInUseCase/GoogleSignInUseCase.dart';
 import 'package:project_flutter_app_delivery/src/features/presentation/StateProviders/LoadingStateProvider.dart';
 import 'package:project_flutter_app_delivery/src/features/presentation/common_widgets/Alerts/alert_dialog.dart';
 import 'package:project_flutter_app_delivery/src/features/presentation/common_widgets/Buttons/rounded_button.dart';
@@ -15,6 +16,8 @@ class ProfileTab extends StatefulWidget {
 }
 
 class _ProfileTabState extends State<ProfileTab> {
+  String? photoURL = GlobalUserData.photoURL;
+  String? name = GlobalUserData.name;
     final ProfileTabViewModel _viewModel;
 
   _ProfileTabState({ ProfileTabViewModel? profileTabViewModel })
@@ -22,6 +25,12 @@ class _ProfileTabState extends State<ProfileTab> {
 
   @override
   Widget build(BuildContext context) {
+        if(photoURL ==''){
+          photoURL ='https://lh3.googleusercontent.com/a/ACg8ocIHoNI2WNV2deDNhANmBZMVcotxhmjeuqiNCXntTcGnFqE=s432-c-no';
+    }
+            if(name ==''){
+          name ='Juan Perez';
+    }
     _viewModel.initState(loadingState: Provider.of<LoadingStateProvider>(context));
 
        return Scaffold(
@@ -52,8 +61,7 @@ class _ProfileTabState extends State<ProfileTab> {
       child: Row(
         children: [
           CircleAvatar(
-            backgroundImage: NetworkImage(
-                'https://lh3.googleusercontent.com/a/ACg8ocIHoNI2WNV2deDNhANmBZMVcotxhmjeuqiNCXntTcGnFqE=s432-c-no'),
+            backgroundImage: NetworkImage(photoURL?? 'https://lh3.googleusercontent.com/a/ACg8ocIHoNI2WNV2deDNhANmBZMVcotxhmjeuqiNCXntTcGnFqE=s432-c-no'),
             radius: 50,
           ),
           Column(
@@ -61,12 +69,12 @@ class _ProfileTabState extends State<ProfileTab> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
-                margin: EdgeInsets.only(left: 15.0),
+                margin: EdgeInsets.only(left: 10.0),
                 child: Row(
                   children: [
                     createText(
-                        texto: 'Juan Castillo',
-                        fontSize: 20,
+                        texto: name?? 'Juan Perez',
+                        fontSize: 12,
                         fontWeight: FontWeight.w600),
                     IconButton(
                         icon: Icon(Icons.chevron_right, color: grey),
@@ -193,6 +201,8 @@ class _ProfileTabState extends State<ProfileTab> {
             color: orange,
             labelButton: 'Cerrar Sesión',
             func: () {
+              GlobalUserData.photoURL ='';
+               GlobalUserData.name ='';
                 _viewModel.signOut().then( (_) {
                     Navigator.pushReplacement(context,
                                               PageRouteBuilder(pageBuilder: (_,__,___) => WelcomePage(),

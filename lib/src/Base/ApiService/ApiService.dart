@@ -11,23 +11,30 @@ abstract class _Exceptions {
 }
 
 abstract class ApiService {
-  Future<Map<String,dynamic>> getDataFromPostRequest({ required Map<String,dynamic> bodyParameters, required String url, Map<String,String>? headers});
-  Future<Map<String,dynamic>> getDataFromPutRequest({  required Map<String,dynamic> bodyParameters, required String url, Map<String,String>? headers});
-  Future<Map<String,dynamic>> getDataFromGetRequest({  required String url, Map<String,String>? headers});
+  Future<Map<String,dynamic>> getDataFromPostRequest({ required Map<String,dynamic> bodyParameters, required String url, Map<String,String>? headers });
+  Future<Map<String,dynamic>> getDataFromPutRequest({ required Map<String,dynamic> bodyParameters, required String url, Map<String,String>? headers });
+  Future<Map<String,dynamic>> getDataFromGetRequest({ required String url, Map<String,String>? headers });
 }
 
 class DefaultApiService extends ApiService {
-  @override
-  Future<Map<String, dynamic>> getDataFromGetRequest({ required String url, Map<String, String>? headers}) async {
-    final _url = Uri.parse(url);
-    final response = await http.get(_url, headers: headers);
 
+  @override
+  Future<Map<String, dynamic>> getDataFromGetRequest({ required String url, Map<String,String>? headers }) async {
+    var _url = Uri.parse(url);
+    var response = await http.get( _url, headers: headers );
     try {
-      if (response.statusCode.toString().contains('20')) {
+      if(response.statusCode.toString().contains('20')) {
         var jsonData = jsonDecode(response.body);
-        return jsonData;
+        //print("Api Service");
+        // print(jsonData);
+        // Null Check
+        if (jsonData == null) {
+          throw Failure.fromMessage(message: _Exceptions.formatException);
+        } else {
+          return jsonData;
+        }
       } else {
-        throw Failure.fromBody(body: response.body);
+        throw Failure.fromBody(body:response.body);
       }
     } on SocketException {
       throw Failure.fromMessage(message: _Exceptions.socketExceptionMessage);
@@ -39,18 +46,22 @@ class DefaultApiService extends ApiService {
   }
 
   @override
-  Future<Map<String, dynamic>> getDataFromPostRequest({required Map<String, dynamic> bodyParameters, required String url, Map<String, String>? headers}) async {
-    final _url = Uri.parse(url);
-    final body = json.encode(bodyParameters);
-    final response = await http.post(_url, headers: headers, body: body);
+  Future<Map<String, dynamic>> getDataFromPostRequest({ required Map<String, dynamic> bodyParameters, required String url, Map<String,String>? headers }) async {
+    var _url = Uri.parse(url);
+    var body = json.encode(bodyParameters);
+    var response = await http.post( _url, headers: headers, body: body);
 
     try {
-      // TODO: Revisar este if con el contains
-      if (response.statusCode.toString().contains('20')) {
+      if(response.statusCode.toString().contains('20')) {
         var jsonData = jsonDecode(response.body);
-        return jsonData;
+        // Null Check
+        if (jsonData == null) {
+          throw Failure.fromMessage(message: _Exceptions.formatException);
+        } else {
+          return jsonData;
+        }
       } else {
-        throw Failure.fromBody(body: response.body);
+        throw Failure.fromBody(body:response.body);
       }
     } on SocketException {
       throw Failure.fromMessage(message: _Exceptions.socketExceptionMessage);
@@ -62,18 +73,24 @@ class DefaultApiService extends ApiService {
   }
 
   @override
-  Future<Map<String, dynamic>> getDataFromPutRequest({required Map<String, dynamic> bodyParameters, required String url, Map<String, String>? headers}) async {
-    final _url = Uri.parse(url);
-    final body = json.encode(bodyParameters);
-    final response = await http.put(_url, headers: headers, body: body);
+  Future<Map<String, dynamic>> getDataFromPutRequest({ required Map<String, dynamic> bodyParameters, 
+                                                       required String url, Map<String,String>? headers }) async {
+    
+    var _url = Uri.parse(url);
+    var body = json.encode(bodyParameters);
+    var response = await http.put( _url, headers: headers, body: body);
 
     try {
-      // TODO: Revisar este if con el contains
-      if (response.statusCode.toString().contains('20')) {
+      if(response.statusCode.toString().contains('20')) {
         var jsonData = jsonDecode(response.body);
-        return jsonData;
+        // Null Check
+        if (jsonData == null) {
+          throw Failure.fromMessage(message: _Exceptions.formatException);
+        } else {
+          return jsonData;
+        }
       } else {
-        throw Failure.fromBody(body: response.body);
+        throw Failure.fromBody(body:response.body);
       }
     } on SocketException {
       throw Failure.fromMessage(message: _Exceptions.socketExceptionMessage);
@@ -83,5 +100,4 @@ class DefaultApiService extends ApiService {
       throw Failure.fromMessage(message: _Exceptions.formatException);
     }
   }
-
 }

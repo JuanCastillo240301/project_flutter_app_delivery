@@ -6,7 +6,7 @@ import 'package:project_flutter_app_delivery/src/features/presentation/StateProv
 import 'package:provider/provider.dart';
 //Routes
 import 'package:project_flutter_app_delivery/src/routes/routes.dart';
-
+import 'package:firebase_core/firebase_core.dart';
 void main() => runApp(const AppState());
 
 
@@ -48,9 +48,10 @@ class MyApp extends StatelessWidget {
     final String _initialRoute;
 
   MyApp({ required String initialRoute }) : _initialRoute = initialRoute;
-
+  
   @override
   Widget build(BuildContext context) {
+    Firebase.initializeApp();
     return MaterialApp(
       title: 'Delivery Proyect',
       debugShowCheckedModeBanner: false,

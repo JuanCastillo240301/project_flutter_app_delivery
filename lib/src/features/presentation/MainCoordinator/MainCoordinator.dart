@@ -1,6 +1,7 @@
 
 
 
+import 'package:flutter/material.dart';
 import 'package:project_flutter_app_delivery/src/Base/Constants/LocalStorageKeys.dart';
 import 'package:project_flutter_app_delivery/src/features/domain/UserCases/LocalStorage/FetchLocalStorageUseCase.dart';
 import 'package:project_flutter_app_delivery/src/features/domain/UserCases/LocalStorage/LocalStorageUseCaseParameters.dart';
@@ -35,5 +36,13 @@ class MainCoordinator {
     var idToken = await _fetchLocalStorageUseCase.execute(parameters: FetchLocalStorageParameters(key: LocalStorageKeys.idToken));
 userUid = idToken;
     return idToken;
+  }
+
+    showWelcomePage({ required BuildContext context }) {
+    Navigator.pushNamed(context, RoutesPath.welcomePath);
+  }
+
+    showTabsPage({required BuildContext context}) {
+    Navigator.pushNamed(context, RoutesPath.tabsPath);
   }
 }
