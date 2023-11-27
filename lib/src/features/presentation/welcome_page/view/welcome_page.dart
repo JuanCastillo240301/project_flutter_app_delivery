@@ -11,7 +11,7 @@ import 'package:project_flutter_app_delivery/src/utils/helpers/ResultType/Result
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:github_sign_in/github_sign_in.dart';
 import 'package:project_flutter_app_delivery/src/features/domain/UserCases/Auth/GoogleSignInUseCase/GoogleSignInUseCase.dart';
-
+import 'package:cached_network_image/cached_network_image.dart';
 class WelcomePage extends StatefulWidget with BaseView {
   WelcomePage({ Key? key }) : super(key: key);
 
@@ -44,7 +44,7 @@ class _WelcomePageState extends State<WelcomePage> with BaseView {
                   image: DecorationImage(
                     fit: BoxFit.cover,
                     image: NetworkImage(
-                        'https://images.unsplash.com/photo-1502301103665-0b95cc738daf?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60'),
+                        'https://firebasestorage.googleapis.com/v0/b/project-flutter-app-delivery.appspot.com/o/imagen_2023-11-27_073911833.png?alt=media&token=e31052c9-9b39-4d63-99a0-b76fe632f860'),
                   )),
               child: BackdropFilter(
                 filter: ImageFilter.blur(sigmaX: 1.0, sigmaY: 1.0),
