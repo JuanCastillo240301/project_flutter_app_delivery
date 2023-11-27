@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:project_flutter_app_delivery/src/Base/Views/BaseView.dart';
 import 'package:project_flutter_app_delivery/src/features/domain/Entities/Places/PlaceList/PlaceListEntity.dart';
 import 'package:project_flutter_app_delivery/src/features/presentation/MainCoordinator/MainCoordinator.dart';
+import 'package:project_flutter_app_delivery/src/features/presentation/StateProviders/UserStateProvider.dart';
 import 'package:project_flutter_app_delivery/src/features/presentation/common_widgets/Components/Cards/FavouritesCards/View/FavouritesCardView.dart';
 import 'package:project_flutter_app_delivery/src/features/presentation/common_widgets/Components/Cards/PlaceListCard/View/PlaceListCardView.dart';
 import 'package:project_flutter_app_delivery/src/utils/helpers/ScreenSize/ScreenSizeHelper.dart';
@@ -44,7 +45,7 @@ class PlaceListCarrousel extends StatelessWidget with BaseView {
                 case PlaceListCarrouselStyle.listCards:
                   return FavouritesCardView(isFavourite: placeList[index].isUserFavourite(userUid: MainCoordinator.sharedInstance?.userUid),
                                             placeListDetailEntity: placeList[index],
-                                            // delegate: Provider.of<DefaultUserState>(context)
+                                            delegate: Provider.of<DefaultUserStateProvider>(context)
                                             );
               }
             })

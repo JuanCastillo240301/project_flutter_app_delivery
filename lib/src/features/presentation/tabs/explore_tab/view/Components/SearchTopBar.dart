@@ -15,7 +15,7 @@ class SearchTopBar extends StatelessWidget {
       children: [
         GestureDetector(
           onTap: () {
-            //showSearch(context: context, delegate: const SearchPage());
+            showSearch(context: context, delegate:  SearchPage());
           },
           child: Container(
             width: getScreenWidth(context: context, multiplier: 0.93),

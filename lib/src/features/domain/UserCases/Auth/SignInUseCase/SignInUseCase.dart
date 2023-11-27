@@ -6,6 +6,7 @@ import 'package:project_flutter_app_delivery/src/features/data/Repositories/Auth
 import 'package:project_flutter_app_delivery/src/features/data/Repositories/Auth/SignInRepository/SignInRepository.dart';
 import 'package:project_flutter_app_delivery/src/features/domain/Entities/Auth/SignInEntity/SignInEntity.dart';
 import 'package:project_flutter_app_delivery/src/features/domain/Interfaces/Interfaces.dart';
+import 'package:project_flutter_app_delivery/src/features/domain/UserCases/Auth/GoogleSignInUseCase/GoogleSignInUseCase.dart';
 import 'package:project_flutter_app_delivery/src/features/domain/UserCases/Auth/SignInUseCase/SignInUseCaseBodyParameters.dart';
 import 'package:project_flutter_app_delivery/src/utils/helpers/ResultType/ResultType.dart';
 
@@ -31,6 +32,9 @@ class DefaultSignInUseCase extends SignInUseCase {
               return Result.failure(Failure.fromMessage(message: AppFailureMessages.unExpectedErrorMessage));
             }
             var entity = SignInEntity.fromMap(result.value!.toMap());
+            print(entity.displayName.toString());
+            print(entity.toJson());
+            GlobalUserData.name = entity.displayName;
             return Result.success(entity);
           case ResultStatus.error:
             return Result.failure(result.error);

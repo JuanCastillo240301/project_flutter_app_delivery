@@ -1,51 +1,51 @@
 import 'package:flutter/material.dart';
+import 'package:project_flutter_app_delivery/src/Base/Views/BaseView.dart';
 import 'package:project_flutter_app_delivery/src/colors.dart';
-import 'package:project_flutter_app_delivery/src/features/presentation/common_widgets/Cards/favourites_card.dart';
-import 'package:project_flutter_app_delivery/src/features/presentation/common_widgets/Texts/header_text.dart';
-
-class FavoriteTab extends StatefulWidget {
-  const FavoriteTab({super.key});
+import 'package:project_flutter_app_delivery/src/features/domain/Entities/Places/PlaceList/PlaceListEntity.dart';
+import 'package:project_flutter_app_delivery/src/features/presentation/Error/ErrorView.dart';
+import 'package:project_flutter_app_delivery/src/features/presentation/StateProviders/UserStateProvider.dart';
+import 'package:project_flutter_app_delivery/src/features/presentation/tabs/favorite_tab/view/Components/FavouriteTabContentView.dart';
+import 'package:provider/provider.dart';
+class FavouriteTab extends StatefulWidget {
+  const FavouriteTab({ Key? key }) : super(key: key);
 
   @override
-  State<FavoriteTab> createState() => _FavoriteTabState();
+  _FavouriteTabState createState() => _FavouriteTabState();
 }
 
-class _FavoriteTabState extends State<FavoriteTab> {
+class _FavouriteTabState extends State<FavouriteTab> with BaseView, FavouritePageChangeStateDelegate {
+
   @override
   Widget build(BuildContext context) {
+
+    Provider.of<DefaultUserStateProvider>(context).favouritePageChangeStateDelegate = this;
+
     return Scaffold(
-      body: CustomScrollView(
-        slivers: <Widget>[
-          SliverAppBar(
-            backgroundColor: white,
-            title: createText(
-                texto: 'Favorite',
-                color: Colors.black,
-                fontSize: 17,
-                fontWeight: FontWeight.bold),
-          ),
-          SliverList(
-              delegate: SliverChildListDelegate([
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20.0),
-              child: Column(
-                children: [
-                   createFavouritesCard(
-                    context: context,
-                    image: NetworkImage('https://img.freepik.com/foto-gratis/superficie-madera-mirando-restaurante-vacio_23-2147701348.jpg?w=826&t=st=1700815666~exp=1700816266~hmac=9c571db4eb3cf3351547d34e4ab9dca4ce09b786b867dd98b8c052d66663b254'),
-                    title: "Restaurante de Lujo",
-                    subtitle: "Av. Constituyentes",
-                    review: "4.2",
-                    ratings: "(22 ratings)",
-                    buttonText: 'Delivery',
-                    hasActionButton: true,
-                    isFavourite: true),
-                ],
-              ),
-            ),
-          ]))
-        ],
-      ),
+      backgroundColor: bgGreyPage,
+      body: FutureBuilder(
+          future: Provider.of<DefaultUserStateProvider>(context).fetchUserFavouritePlaces(),
+          builder: (BuildContext context, AsyncSnapshot<List<PlaceListDetailEntity>> snapshot) {
+            switch(snapshot.connectionState) {
+              case ConnectionState.waiting:
+                return loadingView;
+              case ConnectionState.done:
+                if (snapshot.hasError || !snapshot.hasData) {
+                  return ErrorView();
+                }
+                if (snapshot.hasData) {
+                  return FavouriteTabContentView(placeList:snapshot.data ?? []);
+                } else {
+                  return Container();
+                }
+              default:
+                return loadingView;
+            }
+          })
     );
+  }
+
+  @override
+  placeFromFavouritesRemoved() {
+   setState(() {});
   }
 }

@@ -15,6 +15,7 @@ import 'package:project_flutter_app_delivery/src/utils/helpers/ResultType/Result
 class GlobalUserData {
   static String? photoURL;
   static String? name;
+  static String? idTok;
 }
 abstract class GoogleSignInUseCase {
   Future<Result<UserEntity, Failure>> execute();

@@ -37,6 +37,7 @@ class _FavouritesCardViewState extends State<FavouritesCardView> with BaseView {
         margin: const EdgeInsets.only(top: 16),
         height: 125,
         padding: const EdgeInsets.only(left: 8, right: 8, top: 0, bottom: 0),
+        // decoration: getBoxDecorationWithShadows(),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -137,7 +138,7 @@ class PlaceContentDetailView extends StatelessWidget {
                     fontSize: 13.0),
                 TextView(
                     texto: "  (${placeListDetailEntity.ratings} ratings)",
-                    color: grey,
+                    color: Colors.grey,
                     fontWeight: FontWeight.w500,
                     fontSize: 13.0)
               ],

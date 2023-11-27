@@ -29,6 +29,7 @@ class DefaultUserAuthDataUseCase extends UserAuthDataUseCase {
           if (result.value == null) {
             return Result.failure(Failure.fromMessage(message: AppFailureMessages.unExpectedErrorMessage));
           }
+          print( parameters.idToken);
           return Result.success(UserAuthDataEntity.fromMap(result.value!.toMap()));
         case ResultStatus.error:
          return Result.failure(result.error);

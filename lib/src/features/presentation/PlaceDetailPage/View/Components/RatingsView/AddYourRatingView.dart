@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:project_flutter_app_delivery/src/features/presentation/PlaceDetailPage/View/Components/RatingsView/YourRatingView.dart';
 import 'package:project_flutter_app_delivery/src/features/presentation/common_widgets/Components/Texts/DoubleTextView/View/DoubleTextView.dart';
 import 'package:project_flutter_app_delivery/src/features/presentation/common_widgets/Components/Texts/TextView/View/TextView.dart';
-
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 class AddYourRatingView extends StatelessWidget {
 
@@ -18,7 +18,25 @@ class AddYourRatingView extends StatelessWidget {
         children: [
           const DoubleTextView(textHeader: "Your Rating", textAction: ""),
           const SizedBox(height: 16.0),
-          RatingsButtons(itemSelected: 5),
+       Center(
+         child: RatingBar.builder(
+          initialRating: 3,
+          minRating: 1,
+          direction: Axis.horizontal,
+          allowHalfRating: true,
+          itemCount: 5,
+          itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
+          itemBuilder: (context, _) => Icon(
+            Icons.star,
+            color: Colors.amber,
+          ),
+          onRatingUpdate: (rating) {
+            DoubleTextView(textHeader: "Your Rating $rating", textAction: "");
+          },
+       ),
+       
+       ),
+       
           Container(
             margin: const EdgeInsets.only(top: 10),
             decoration: BoxDecoration(

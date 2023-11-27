@@ -48,7 +48,7 @@ class _TabsPageState extends State<TabsPage> with BaseView {
   List<Widget> _widgetOptions = [
     ExploreTab(),
     MyOrder(),
-    FavoriteTab(),
+    FavouriteTab(),
     ProfileTab()
   ];
 
@@ -57,7 +57,7 @@ class _TabsPageState extends State<TabsPage> with BaseView {
   @override
   Widget build(BuildContext context) {
     viewModel.initState(loadingStateProvider: Provider.of<LoadingStateProvider>(context));
-
+    
     return viewModel.loadingState.isLoading ? loadingView : Scaffold(
       body: _widgetOptions.elementAt(_selectedItemIndex),
       bottomNavigationBar: _bottomNavigationBar(context),

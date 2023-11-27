@@ -6,28 +6,22 @@ import 'package:project_flutter_app_delivery/src/services/FirebaseServices/Realt
 import 'package:project_flutter_app_delivery/src/services/FirebaseServices/RealtimeDatabaseService/Services/RealtimeDataBaseService.dart';
 import 'package:project_flutter_app_delivery/src/utils/helpers/ResultType/ResultType.dart';
 
-extension Paths on DefaultFetchUserDataRepository {
-  static String path = "users/";
-}
-
 class DefaultFetchUserDataRepository extends FetchUserDataRepository {
+  final String _path = "users/";
 
-  // Dependencias
-  final RealtimeDatabaseService _realtimeDatabaseService;
+  // * Dependencies
+  final RealtimeDatabaseService _realtimeDataBaseService;
 
-  DefaultFetchUserDataRepository({ RealtimeDatabaseService? realtimeDatabaseService })
-              : _realtimeDatabaseService = realtimeDatabaseService ?? DefaultRealtimeDatabaseService();
+  DefaultFetchUserDataRepository({ RealtimeDatabaseService? realtimeDataBaseService }) : _realtimeDataBaseService = realtimeDataBaseService ?? DefaultRealtimeDatabaseService();
 
   @override
-  Future<Result<UserDecodable, Failure>> fetchUserData({required String localId}) async {
-    var fullpath = path + localId;
-
+  Future<Result<UserDecodable, Failure>> fetchUserData({ required String localId }) async {
+    var fullpath = _path + localId;
     try {
-      final result = await _realtimeDatabaseService.getData(path: fullpath);
-      UserDecodable _decodable = UserDecodable.fromMap(result);
-      return Result.success(_decodable);
-    } on Failure catch(f) {
-       return Result.failure(f);
+      final result = await _realtimeDataBaseService.getData(path: fullpath);
+      return Result.success(UserDecodable.fromMap(result));
+    } on Failure catch (f) {
+      return Result.failure(f);
     }
   }
 }

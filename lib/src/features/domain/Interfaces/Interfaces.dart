@@ -10,6 +10,7 @@ import 'package:project_flutter_app_delivery/src/features/data/Repositories/Auth
 import 'package:project_flutter_app_delivery/src/features/data/Repositories/Auth/SignUpRepository/SignUpRepositoryParameters.dart';
 import 'package:project_flutter_app_delivery/src/features/data/Repositories/Auth/UserAuthData/UserAuthDataRepositoryBodyParameters.dart';
 import 'package:project_flutter_app_delivery/src/features/data/Repositories/users/UserBodyParameters.dart';
+import 'package:project_flutter_app_delivery/src/features/domain/Entities/Places/PlaceList/PlaceListEntity.dart';
 import 'package:project_flutter_app_delivery/src/services/FirebaseServices/AuthFirebaseServices/Decodables/SignInDecodable.dart';
 import 'package:project_flutter_app_delivery/src/services/FirebaseServices/AuthFirebaseServices/Decodables/SignUpDecodable.dart';
 import 'package:project_flutter_app_delivery/src/services/FirebaseServices/AuthFirebaseServices/Decodables/UpdatePasswordDecodable.dart';
@@ -66,4 +67,9 @@ abstract class PlaceListRepository {
   Future<PlaceListDecodable> fetchPlacesListByCategory({ required int categoryId });
   Future<PlaceListDecodable> fetchPlacesListByQuery({ required String query });
   Future<PlaceListDecodable> fetchPlacesListByRecentSearches({ required List<String> placeIds });
+}
+
+// * Places Repositories
+abstract class PlaceDetailRepository {
+  Future<void> savePlaceDetail({ required PlaceListDetailEntity placeDetail });
 }

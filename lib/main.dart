@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:project_flutter_app_delivery/src/Base/Views/BaseView.dart';
+import 'package:project_flutter_app_delivery/src/features/presentation/MainCoordinator/MainCoordinator.dart';
 import 'package:project_flutter_app_delivery/src/features/presentation/StateProviders/ErrorStateProvider.dart';
 import 'package:project_flutter_app_delivery/src/features/presentation/StateProviders/LoadingStateProvider.dart';
+import 'package:project_flutter_app_delivery/src/features/presentation/StateProviders/UserStateProvider.dart';
+import 'package:project_flutter_app_delivery/src/services/FirebaseServices/FirebaseMessages/FirebaseApi.dart';
 import 'package:provider/provider.dart';
 //Routes
 import 'package:project_flutter_app_delivery/src/routes/routes.dart';
@@ -17,7 +20,8 @@ class AppState extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(providers: [
       ChangeNotifierProvider(create: (_) => ErrorStateProvider()),
-      ChangeNotifierProvider(create: (_) => LoadingStateProvider())
+      ChangeNotifierProvider(create: (_) => LoadingStateProvider()),
+      ChangeNotifierProvider(create: (_) => DefaultUserStateProvider())
     ],
     child: MyAppUserState());
   }
@@ -32,6 +36,7 @@ class MyAppUserState extends StatelessWidget with BaseView {
     return FutureBuilder(future: coordinator.start(context),
                          builder: (BuildContext context, AsyncSnapshot snapshot) {
         if (snapshot.hasData) {
+          Provider.of<DefaultUserStateProvider>(context).fetchUserData(localId: MainCoordinator.sharedInstance?.userUid??'');
           return MyApp(initialRoute: snapshot.data);
         } else {
           return CircularProgressIndicator();
@@ -52,6 +57,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Firebase.initializeApp();
+   // FirebaseApi().initNoti;
     return MaterialApp(
       title: 'Delivery Proyect',
       debugShowCheckedModeBanner: false,
