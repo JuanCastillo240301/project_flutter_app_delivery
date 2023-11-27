@@ -39,7 +39,7 @@ class DefaultGoogleSignInUseCase extends GoogleSignInUseCase {
   @override
   Future<Result<UserEntity, Failure>> execute() async {
     final user = await _googleSignInService.signInWithGoogle();
-    _saveLocalStorageUseCase.execute(parameters: SaveLocalStorageParameters(key: LocalStorageKeys.idToken,
+    _saveLocalStorageUseCase.execute(saveLocalParameteres: SaveLocalStorageParameters(key: LocalStorageKeys.idToken,
                                                                                       value: user.idToken ?? "123213"));
     final isUserInDatabase = await _googleSignInService.isUserInDatabase(uid: user.uid ?? "123123");
     if (isUserInDatabase) {

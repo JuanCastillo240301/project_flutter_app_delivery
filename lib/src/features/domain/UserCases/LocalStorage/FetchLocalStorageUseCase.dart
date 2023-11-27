@@ -8,19 +8,26 @@ import 'package:project_flutter_app_delivery/src/features/domain/Interfaces/Inte
 import 'LocalStorageUseCaseParameters.dart';
 
 abstract class FetchLocalStorageUseCase {
-  Future<String?> execute({ required FetchLocalStorageParameters parameters });
+  Future<String?> execute({ required FetchLocalStorageParameters fetchLocalParameteres });
+  Future<List<String>> fetchRecentSearches();
 }
 
 class DefaultFetchLocalStorageUseCase extends FetchLocalStorageUseCase {
 
-  // Dependencias
+  // * Dependencies
   final FetchLocalStorageRepository _fetchLocalStorageRepository;
-
+  
   DefaultFetchLocalStorageUseCase({ FetchLocalStorageRepository? fetchLocalStorageRepository })
-     : _fetchLocalStorageRepository = fetchLocalStorageRepository ?? DefaultFetchLocalStorageRepository();
+      : _fetchLocalStorageRepository = fetchLocalStorageRepository ?? DefaultFetchLocalStorageRepository();
 
   @override
-  Future<String?> execute({required FetchLocalStorageParameters parameters}) async {
-    return await _fetchLocalStorageRepository.fetchInLocalStorage(key: parameters.key);
+  Future<String?> execute({ required FetchLocalStorageParameters fetchLocalParameteres }) async {
+    return await _fetchLocalStorageRepository.fetchInLocalStorage(key: fetchLocalParameteres.key);
+  }
+
+  @override
+  Future<List<String>> fetchRecentSearches() async {
+    final recentSearches = await _fetchLocalStorageRepository.fetchRecentSearches();
+    return recentSearches ?? [];
   }
 }

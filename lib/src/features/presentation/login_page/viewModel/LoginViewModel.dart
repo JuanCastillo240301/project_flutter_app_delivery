@@ -55,7 +55,7 @@ class DefaultLoginViewModel extends LoginViewModel {
              switch (result.status) {
                case ResultStatus.success:
                  loadingState.setLoadingState(isLoading: false);
-                 _saveLocalStorageUseCase.execute(parameters: SaveLocalStorageParameters( key: LocalStorageKeys.idToken,
+                 _saveLocalStorageUseCase.execute(saveLocalParameteres: SaveLocalStorageParameters( key: LocalStorageKeys.idToken,
                                                                                           value: result.value?.idToken ?? ""));
 
                  return Result.success(true);

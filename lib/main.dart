@@ -29,7 +29,7 @@ class MyAppUserState extends StatelessWidget with BaseView {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(future: coordinator.start(),
+    return FutureBuilder(future: coordinator.start(context),
                          builder: (BuildContext context, AsyncSnapshot snapshot) {
         if (snapshot.hasData) {
           return MyApp(initialRoute: snapshot.data);

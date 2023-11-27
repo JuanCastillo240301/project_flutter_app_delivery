@@ -57,16 +57,19 @@ class DefaultSignUpViewModel extends SignUpViewModel {
                                                                   phone: signUpModel?.phone ?? "",
                                                                   date: signUpModel?.date))
                          .then( (result) {
-      switch (result.status) {
-        case ResultStatus.success:
-          _saveLocalStorageUseCase.execute(parameters: SaveLocalStorageParameters(key: LocalStorageKeys.idToken,
-                                                                                  value: result.value?.idToken ?? ""));
-          loadingState.setLoadingState(isLoading: false);
-          return Result.success(true);
-        case ResultStatus.error:
-          loadingState.setLoadingState(isLoading: false);
-          return Result.failure(result.error);
-      }
+              switch (result.status) {
+                case ResultStatus.success:
+                  _saveLocalStorageUseCase.execute(
+                      saveLocalParameteres: SaveLocalStorageParameters(
+                          key: LocalStorageKeys.idToken,
+                          value: result.value?.localId ?? ""));
+
+                  loadingState.setLoadingState(isLoading: false);
+                  return Result.success(true);
+                case ResultStatus.error:
+                  loadingState.setLoadingState(isLoading: false);
+                  return Result.failure(result.error);
+              }
     });
   }
 
