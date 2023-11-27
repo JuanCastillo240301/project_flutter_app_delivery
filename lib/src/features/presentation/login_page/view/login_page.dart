@@ -45,7 +45,7 @@ class LoginPage extends StatelessWidget  with BaseView{
                          height: 350.0,
                          fit: BoxFit.cover,
                          image: NetworkImage(
-                             'https://images.unsplash.com/photo-1482049016688-2d3e1b311543?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60')),
+                             'https://firebasestorage.googleapis.com/v0/b/project-flutter-app-delivery.appspot.com/o/imagen_2023-11-27_074156230.png?alt=media&token=e5f3b750-5959-43f6-8fd1-713954932636')),
                    ],
                  ),
                  Transform.translate(
