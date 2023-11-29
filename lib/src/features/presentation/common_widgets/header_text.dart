@@ -8,6 +8,9 @@ Widget createText(
     TextAlign textAlign = TextAlign.justify}) {
   return Text(texto,
       textAlign: textAlign,
-      style:
-          TextStyle(color: color, fontWeight: fontWeight, fontSize: fontSize));
+      style: TextStyle(
+          color: color,
+          fontWeight: fontWeight,
+          fontSize: fontSize,
+          fontFamily: 'Oswald'));
 }

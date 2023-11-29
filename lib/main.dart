@@ -10,8 +10,13 @@ import 'package:provider/provider.dart';
 //Routes
 import 'package:project_flutter_app_delivery/src/routes/routes.dart';
 import 'package:firebase_core/firebase_core.dart';
-void main() => runApp(const AppState());
 
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  await FirebaseApi().initNoti();
+  runApp(const AppState());
+}
 
 class AppState extends StatelessWidget {
   const AppState({Key? key}) : super(key: key);
@@ -22,48 +27,41 @@ class AppState extends StatelessWidget {
       ChangeNotifierProvider(create: (_) => ErrorStateProvider()),
       ChangeNotifierProvider(create: (_) => LoadingStateProvider()),
       ChangeNotifierProvider(create: (_) => DefaultUserStateProvider())
-    ],
-    child: MyAppUserState());
+    ], child: MyAppUserState());
   }
 }
-
-
 
 class MyAppUserState extends StatelessWidget with BaseView {
-
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(future: coordinator.start(context),
-                         builder: (BuildContext context, AsyncSnapshot snapshot) {
-        if (snapshot.hasData) {
-          Provider.of<DefaultUserStateProvider>(context).fetchUserData(localId: MainCoordinator.sharedInstance?.userUid??'');
-          return MyApp(initialRoute: snapshot.data);
-        } else {
-          return CircularProgressIndicator();
-        }
-    });
+    return FutureBuilder(
+        future: coordinator.start(context),
+        builder: (BuildContext context, AsyncSnapshot snapshot) {
+          if (snapshot.hasData) {
+            Provider.of<DefaultUserStateProvider>(context).fetchUserData(
+                localId: MainCoordinator.sharedInstance?.userUid ?? '');
+            return MyApp(initialRoute: snapshot.data);
+          } else {
+            return CircularProgressIndicator();
+          }
+        });
   }
 }
 
-
-
-
 class MyApp extends StatelessWidget {
+  final String _initialRoute;
 
-    final String _initialRoute;
+  MyApp({required String initialRoute}) : _initialRoute = initialRoute;
 
-  MyApp({ required String initialRoute }) : _initialRoute = initialRoute;
-  
   @override
   Widget build(BuildContext context) {
-    Firebase.initializeApp();
-   // FirebaseApi().initNoti;
+    // FirebaseApi().initNoti;
     return MaterialApp(
       title: 'Delivery Proyect',
       debugShowCheckedModeBanner: false,
       routes: routes,
       initialRoute: _initialRoute,
-            localizationsDelegates: const [
+      localizationsDelegates: const [
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
@@ -77,12 +75,10 @@ class MyApp extends StatelessWidget {
         hintColor: const Color.fromRGBO(10, 31, 68, 1.0),
         buttonTheme: const ButtonThemeData(
           buttonColor: Color.fromRGBO(0, 122, 255, 1.0),
-          ),
+        ),
         disabledColor: const Color.fromRGBO(142, 142, 147, 1.2),
         scaffoldBackgroundColor: Colors.white,
-        appBarTheme: const AppBarTheme(
-          color: Colors.black
-          ),
+        appBarTheme: const AppBarTheme(color: Colors.black),
       ),
       home: Scaffold(
         appBar: AppBar(
